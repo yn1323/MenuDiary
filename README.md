@@ -10,3 +10,17 @@
    - 作り方
    - 備考欄
 2. Googleログインによる共有
+
+## システム
+- React Native(Expo)
+- Firebase
+- Native Base(UIフレームワーク)
+
+## リンク
+- [開発Wiki](https://github.com/yn1323/MenuDiary/wiki)
+
+## Author
+ynatani
+
+## License
+MIT
