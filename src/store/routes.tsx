@@ -10,11 +10,12 @@ import Timeline from '../pages/Timeline'
 import Tutorial from '../pages/Tutorial'
 
 export type RouteState = {
-  title: string
+  title: string // メニューに表示
   component: any
   key: string
-  initial: boolean
-  selected: boolean
+  initial: boolean // 初回表示
+  selected: boolean // ドロワーで選択状態か(使用していない)
+  showInDrawer: boolean // ドロワー表示
 }
 
 type Action = {
@@ -24,32 +25,12 @@ type Action = {
 
 const initialState: RouteState[] = [
   {
-    title: '設定',
-    component: Config,
-    key: 'Config',
-    initial: false,
-    selected: false,
-  },
-  {
-    title: '詳細表示',
-    component: Detail,
-    key: 'Detail',
-    initial: false,
-    selected: false,
-  },
-  {
-    title: 'ログイン',
-    component: Login,
-    key: 'Login',
-    initial: false,
-    selected: false,
-  },
-  {
-    title: '編集',
-    component: PostEdit,
-    key: 'PostEdit',
-    initial: false,
-    selected: false,
+    title: 'タイムライン',
+    component: Timeline,
+    key: 'Timeline',
+    initial: true,
+    selected: true,
+    showInDrawer: true,
   },
   {
     title: '検索条件',
@@ -57,13 +38,7 @@ const initialState: RouteState[] = [
     key: 'SearchCondition',
     initial: false,
     selected: false,
-  },
-  {
-    title: '検索結果',
-    component: SearchList,
-    key: 'SearchList',
-    initial: false,
-    selected: false,
+    showInDrawer: true,
   },
   {
     title: 'タグ編集',
@@ -71,13 +46,47 @@ const initialState: RouteState[] = [
     key: 'TagEdit',
     initial: false,
     selected: false,
+    showInDrawer: true,
   },
   {
-    title: 'タイムライン',
-    component: Timeline,
-    key: 'Timeline',
-    initial: true,
-    selected: true,
+    title: '設定',
+    component: Config,
+    key: 'Config',
+    initial: false,
+    selected: false,
+    showInDrawer: true,
+  },
+  {
+    title: '詳細表示',
+    component: Detail,
+    key: 'Detail',
+    initial: false,
+    selected: false,
+    showInDrawer: false,
+  },
+  {
+    title: 'ログイン',
+    component: Login,
+    key: 'Login',
+    initial: false,
+    selected: false,
+    showInDrawer: false,
+  },
+  {
+    title: '編集',
+    component: PostEdit,
+    key: 'PostEdit',
+    initial: false,
+    selected: false,
+    showInDrawer: false,
+  },
+  {
+    title: '検索結果',
+    component: SearchList,
+    key: 'SearchList',
+    initial: false,
+    selected: false,
+    showInDrawer: false,
   },
   {
     title: 'チュートリアル',
@@ -85,6 +94,7 @@ const initialState: RouteState[] = [
     key: 'Tutorial',
     initial: false,
     selected: false,
+    showInDrawer: false,
   },
 ]
 

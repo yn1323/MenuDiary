@@ -4,10 +4,12 @@ import { View, StyleSheet } from 'react-native'
 import { Button, List, ListItem, Text, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import { State } from '../../types'
-import { RouteState, setSelected } from '../../store/routes'
+import { RouteState } from '../../store/routes'
 
 export default (): JSX.Element => {
-  const routes = useSelector((state: State) => state.routes)
+  const routes = useSelector((state: State) =>
+    state.routes.filter((route: RouteState) => route.showInDrawer),
+  )
   // const dispatch = useDispatch()
 
   const handleClick = (key: string) => {
