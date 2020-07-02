@@ -8,9 +8,18 @@ import SideBar from '../containers/parts/SideBar'
 import { RouteState } from '../store/routes'
 import { State } from '../types'
 
+// コンポーネント
+import Detail from './Detail'
+import PostEdit from './PostEdit'
+import SearchList from './SearchList'
+
+import BackButton from '../containers/fragments/BackButton'
+
 export default (): JSX.Element => {
   const title = 'Menu Diary'
-  const routes = useSelector((state: State) => state.routes)
+  const routes = useSelector((state: State) =>
+    state.routes.filter((route: RouteState) => route.showInDrawer),
+  )
 
   const mapPages = (): JSX.Element => {
     return (
@@ -32,6 +41,7 @@ export default (): JSX.Element => {
     <Provider store={store}>
       <Router navigationBarStyle={styles.header}>
         <Scene key="root" hideNavBar>
+          {/* ドロワー表示ページ */}
           <Drawer
             initial
             key="drawer"
@@ -43,6 +53,43 @@ export default (): JSX.Element => {
           >
             {mapPages()}
           </Drawer>
+          {/* タイムラインからの詳細表示 */}
+          <Scene key="Post">
+            <Scene
+              key="Detail"
+              renderLeftButton={BackButton}
+              component={Detail}
+              initial
+            />
+            <Scene
+              key="PostEdit"
+              component={PostEdit}
+              // ↓がないとbackButtonTintColorが反映されない
+              backButtonTextStyle={{ color: 'purple' }}
+              backButtonTintColor="#eee"
+            />
+          </Scene>
+          {/* 検索からの詳細表示 */}
+          <Scene key="Search">
+            <Scene
+              key="SearchList"
+              renderLeftButton={BackButton}
+              component={SearchList}
+              initial
+            />
+            <Scene
+              key="Detail"
+              component={Detail}
+              backButtonTextStyle={{ color: '#eee' }}
+              backButtonTintColor="#eee"
+            />
+            <Scene
+              key="PostEdit"
+              component={PostEdit}
+              backButtonTextStyle={{ color: '#eee' }}
+              backButtonTintColor="#eee"
+            />
+          </Scene>
         </Scene>
       </Router>
     </Provider>
