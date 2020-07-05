@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { View, Icon } from 'native-base'
+import { StyleSheet, View } from 'react-native'
+import { Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
 export default (): JSX.Element => (
