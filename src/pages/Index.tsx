@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import { Icon, Container } from 'native-base'
 import { useSelector } from 'react-redux'
 import { Router, Scene, Drawer } from 'react-native-router-flux'
 import SideBar from '../containers/parts/SideBar'
@@ -37,57 +37,61 @@ export default (): JSX.Element => {
   }
 
   return (
-    <Router navigationBarStyle={styles.header}>
-      <Scene key="root" hideNavBar>
-        {/* ドロワー表示ページ */}
-        <Drawer
-          initial
-          key="drawer"
-          drawerWidth={300}
-          contentComponent={SideBar}
-          drawerIcon={() => <Icon name="menu" style={{ color: '#eee' }}></Icon>}
-        >
-          {mapPages()}
-        </Drawer>
-        {/* タイムラインからの詳細表示 */}
-        <Scene key="Post">
-          <Scene
-            key="Detail"
-            renderLeftButton={BackButton}
-            component={Detail}
+    <Container>
+      <Router navigationBarStyle={styles.header}>
+        <Scene key="root" hideNavBar>
+          {/* ドロワー表示ページ */}
+          <Drawer
             initial
-          />
-          <Scene
-            key="PostEdit"
-            component={PostEdit}
-            // ↓がないとbackButtonTintColorが反映されない
-            backButtonTextStyle={{ color: 'purple' }}
-            backButtonTintColor="#eee"
-          />
+            key="drawer"
+            drawerWidth={300}
+            contentComponent={SideBar}
+            drawerIcon={() => (
+              <Icon name="menu" style={{ color: '#eee' }}></Icon>
+            )}
+          >
+            {mapPages()}
+          </Drawer>
+          {/* タイムラインからの詳細表示 */}
+          <Scene key="Post">
+            <Scene
+              key="Detail"
+              renderLeftButton={BackButton}
+              component={Detail}
+              initial
+            />
+            <Scene
+              key="PostEdit"
+              component={PostEdit}
+              // ↓がないとbackButtonTintColorが反映されない
+              backButtonTextStyle={{ color: 'purple' }}
+              backButtonTintColor="#eee"
+            />
+          </Scene>
+          {/* 検索からの詳細表示 */}
+          <Scene key="Search">
+            <Scene
+              key="SearchList"
+              renderLeftButton={BackButton}
+              component={SearchList}
+              initial
+            />
+            <Scene
+              key="Detail"
+              component={Detail}
+              backButtonTextStyle={{ color: '#eee' }}
+              backButtonTintColor="#eee"
+            />
+            <Scene
+              key="PostEdit"
+              component={PostEdit}
+              backButtonTextStyle={{ color: '#eee' }}
+              backButtonTintColor="#eee"
+            />
+          </Scene>
         </Scene>
-        {/* 検索からの詳細表示 */}
-        <Scene key="Search">
-          <Scene
-            key="SearchList"
-            renderLeftButton={BackButton}
-            component={SearchList}
-            initial
-          />
-          <Scene
-            key="Detail"
-            component={Detail}
-            backButtonTextStyle={{ color: '#eee' }}
-            backButtonTintColor="#eee"
-          />
-          <Scene
-            key="PostEdit"
-            component={PostEdit}
-            backButtonTextStyle={{ color: '#eee' }}
-            backButtonTintColor="#eee"
-          />
-        </Scene>
-      </Scene>
-    </Router>
+      </Router>
+    </Container>
   )
 }
 
