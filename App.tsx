@@ -7,6 +7,11 @@ import { Ionicons } from '@expo/vector-icons'
 import { Provider } from 'react-redux'
 import store from './src/store'
 
+// カスタムテーマ
+import getTheme from './native-base-theme/components'
+import commonColor from './native-base-theme/variables/commonColor'
+import { StyleProvider } from 'native-base'
+
 // Androidではnativebaseのフォントがないので、ここで読み込む
 // ComponentWillMountが必要なのでクラスコンポーネントでないといけない？？
 export default class App extends Component {
@@ -26,9 +31,11 @@ export default class App extends Component {
       return <AppLoading />
     } else {
       return (
-        <Provider store={store}>
-          <Index />
-        </Provider>
+        <StyleProvider style={getTheme(commonColor)}>
+          <Provider store={store}>
+            <Index />
+          </Provider>
+        </StyleProvider>
       )
     }
   }
