@@ -11,6 +11,7 @@ import { State } from '../types'
 import Detail from './Detail'
 import PostEdit from './PostEdit'
 import SearchList from './SearchList'
+import Login from './Login'
 
 import BackButton from '../containers/fragments/BackButton'
 
@@ -42,13 +43,13 @@ export default (): JSX.Element => {
         <Scene key="root" hideNavBar>
           {/* ドロワー表示ページ */}
           <Drawer
-            initial
             key="drawer"
             drawerWidth={300}
             contentComponent={SideBar}
             drawerIcon={() => (
               <Icon name="menu" style={{ color: '#eee' }}></Icon>
             )}
+            navigationBarStyle={styles.header}
           >
             {mapPages()}
           </Drawer>
@@ -97,7 +98,7 @@ export default (): JSX.Element => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#078080',
   },
   header_text: {
     color: '#eee',
