@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux'
 // import { moduleName } from 'react-redux';
 
 import Card from '../containers/parts/Card'
+import Paginator from '../containers/parts/Paginator'
 import globalStyle from '../styles/global'
 
 interface Props {}
@@ -11,10 +12,6 @@ interface Props {}
 type AllProps = Readonly<Props>
 
 export default (): JSX.Element => {
-  const handlePress = () => {
-    Actions.Post()
-  }
-
   const mapCards = useCallback(() => {
     return (
       <>
@@ -33,10 +30,15 @@ export default (): JSX.Element => {
     )
   }, [])
 
+  const renderPaginator = useCallback(() => {
+    return <Paginator from={1} to={4} all={30} />
+  }, [])
+
   return (
     <Container>
       <Content padder style={globalStyle.content_padding}>
         {mapCards()}
+        {renderPaginator()}
       </Content>
     </Container>
   )

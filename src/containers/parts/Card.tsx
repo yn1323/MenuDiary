@@ -12,6 +12,8 @@ import {
   Right,
 } from 'native-base'
 
+import globalStyle from '../../styles/global'
+
 interface Props {
   icon: string
   img: string
@@ -36,7 +38,7 @@ export default memo(
   }: Props): JSX.Element => {
     return (
       <Card>
-        <CardItem>
+        <CardItem style={globalStyle.background}>
           <Left>
             <Thumbnail source={{ uri: icon }} />
             <Body>
@@ -48,7 +50,7 @@ export default memo(
         <CardItem cardBody>
           <Image source={{ uri: img }} style={styles.image} />
         </CardItem>
-        <CardItem>
+        <CardItem style={globalStyle.background}>
           <Left>
             <Button transparent>
               <Icon active name="thumbs-up" />
