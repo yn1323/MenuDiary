@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Image, StyleSheet } from 'react-native'
 import {
   Card,
@@ -36,17 +36,24 @@ export default memo(
     comments,
     regDate,
   }: Props): JSX.Element => {
+    const mapTags = () =>
+      tags.map((tag) => (
+        <Button small style={styles.btn}>
+          <Text>{tag}</Text>
+        </Button>
+      ))
+
     return (
       <Card>
-        <CardItem style={globalStyle.background}>
+        <CardItem style={[globalStyle.background]}>
           <Left>
             <Thumbnail source={{ uri: icon }} />
             <Body>
               <Text>{menuName}</Text>
-              <Text note>{tags.join(',')}</Text>
             </Body>
           </Left>
         </CardItem>
+        <CardItem style={[globalStyle.background]}>{mapTags()}</CardItem>
         <CardItem cardBody>
           <Image source={{ uri: img }} style={styles.image} />
         </CardItem>
@@ -76,5 +83,8 @@ const styles = StyleSheet.create({
   image: {
     height: 250,
     flex: 1,
+  },
+  btn: {
+    marginRight: 5,
   },
 })
