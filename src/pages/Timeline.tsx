@@ -15,8 +15,9 @@ export default (): JSX.Element => {
   const mapCards = useCallback(() => {
     return (
       <>
-        {testData.map((d) => (
+        {testData.map((d, index) => (
           <Card
+            key={index}
             icon={d.icon}
             img={d.img}
             menuName={d.menuName}

@@ -37,8 +37,8 @@ export default memo(
     regDate,
   }: Props): JSX.Element => {
     const mapTags = () =>
-      tags.map((tag) => (
-        <Button small style={styles.btn}>
+      tags.map((tag, index) => (
+        <Button small style={styles.btn} key={index}>
           <Text>{tag}</Text>
         </Button>
       ))
@@ -47,7 +47,7 @@ export default memo(
       <Card>
         <CardItem style={[globalStyle.background]}>
           <Left>
-            <Thumbnail source={{ uri: icon }} />
+            <Thumbnail source={icon} />
             <Body>
               <Text>{menuName}</Text>
             </Body>
@@ -55,7 +55,7 @@ export default memo(
         </CardItem>
         <CardItem style={[globalStyle.background]}>{mapTags()}</CardItem>
         <CardItem cardBody>
-          <Image source={{ uri: img }} style={styles.image} />
+          <Image source={img} style={styles.image} />
         </CardItem>
         <CardItem style={globalStyle.background}>
           <Left>
