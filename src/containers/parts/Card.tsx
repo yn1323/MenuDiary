@@ -12,6 +12,9 @@ import {
   Right,
 } from 'native-base'
 
+// component
+import Tags from '../fragments/Tags'
+
 import globalStyle from '../../styles/global'
 
 interface Props {
@@ -36,13 +39,6 @@ export default memo(
     comments,
     regDate,
   }: Props): JSX.Element => {
-    const mapTags = () =>
-      tags.map((tag, index) => (
-        <Button small style={styles.btn} key={index}>
-          <Text>{tag}</Text>
-        </Button>
-      ))
-
     return (
       <Card>
         <CardItem style={[globalStyle.background]}>
@@ -53,7 +49,9 @@ export default memo(
             </Body>
           </Left>
         </CardItem>
-        <CardItem style={[globalStyle.background]}>{mapTags()}</CardItem>
+        <CardItem style={[globalStyle.background]}>
+          <Tags tags={tags} />
+        </CardItem>
         <CardItem cardBody>
           <Image source={img} style={styles.image} />
         </CardItem>
