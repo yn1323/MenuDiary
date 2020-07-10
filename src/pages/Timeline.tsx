@@ -8,10 +8,6 @@ import Card from '../containers/parts/Card'
 import Paginator from '../containers/parts/Paginator'
 import globalStyle from '../styles/global'
 
-interface Props {}
-
-type AllProps = Readonly<Props>
-
 export default (): JSX.Element => {
   const mapCards = useCallback(() => {
     return (
