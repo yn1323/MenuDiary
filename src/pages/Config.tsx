@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'native-base'
+import { Text, Container, Content } from 'native-base'
 // import { moduleName } from 'react-redux';
 
 interface Props {}
@@ -9,8 +9,8 @@ type AllProps = Readonly<Props>
 
 export default (): JSX.Element => {
   return (
-    <View>
-      <Text>Config</Text>
-    </View>
+    <Container>
+      <Content padder></Content>
+    </Container>
   )
 }

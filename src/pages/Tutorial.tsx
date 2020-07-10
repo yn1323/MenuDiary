@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { StyleSheet, Dimensions, Image } from 'react-native'
-import { Text, Content, View, Body, Button } from 'native-base'
+import { Text, View, Body, Button } from 'native-base'
 import GestureRecognizer from 'react-native-swipe-gestures'
 import { Actions } from 'react-native-router-flux'
+
+// component
+import Scroll from '../templates/Scroll'
 import Pagedot from '../containers/fragments/Pagedot'
 
 export interface Desc {
@@ -24,11 +27,11 @@ export default (): JSX.Element => {
     Actions.drawer()
   }
   const handleSwipe = (inc) => {
-    console.log(inc)
+    alert(inc)
   }
 
   return (
-    <Content padder>
+    <Scroll disableScroll>
       <GestureRecognizer
         onSwipeRight={() => handleSwipe(-1)}
         onSwipeLeft={() => handleSwipe(1)}
@@ -43,7 +46,7 @@ export default (): JSX.Element => {
           <View style={styles.centeringVertical}>
             <Body style={styles.margin}>
               <Image
-                source={{ uri: require('../../assets/icons/main.png') }}
+                source={require('../../assets/icons/main.png')}
                 style={styles.image}
               />
             </Body>
@@ -56,7 +59,7 @@ export default (): JSX.Element => {
           </View>
         </View>
       </GestureRecognizer>
-    </Content>
+    </Scroll>
   )
 }
 

@@ -58,7 +58,7 @@ export default (): JSX.Element => {
             {mapPages()}
           </Drawer>
           {/* タイムラインからの詳細表示 */}
-          <Scene key="Post" initial>
+          <Scene key="Post">
             <Scene
               key="Detail"
               renderLeftButton={BackButton}

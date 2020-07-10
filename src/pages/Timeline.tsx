@@ -3,6 +3,7 @@ import { Content, Body, Container } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 // import { moduleName } from 'react-redux';
 
+// component
 import Card from '../containers/parts/Card'
 import Paginator from '../containers/parts/Paginator'
 import globalStyle from '../styles/global'
@@ -37,7 +38,7 @@ export default (): JSX.Element => {
 
   return (
     <Container>
-      <Content padder style={globalStyle.content_padding}>
+      <Content padder style={{ marginBottom: 40 }}>
         {mapCards()}
         {renderPaginator()}
       </Content>

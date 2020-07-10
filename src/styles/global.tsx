@@ -13,9 +13,6 @@ export default StyleSheet.create({
   text: {
     color: '#232323',
   },
-  content_padding: {
-    paddingBottom: 40,
-  },
   center_vh: {
     flexDirection: 'row',
     justifyContent: 'center',

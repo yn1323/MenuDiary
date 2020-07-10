@@ -5,6 +5,7 @@ import { PostState, Ingredients } from '../store/post'
 import { useSelector } from 'react-redux'
 
 // component
+import Scroll from '../templates/Scroll'
 import Tags from '../containers/fragments/Tags'
 import Hr from '../containers/fragments/Hr'
 
@@ -42,67 +43,63 @@ export default (): JSX.Element => {
     ))
 
   return (
-    <Container>
-      <Content padder>
-        <View style={{ height }}>
-          {/* タイトル */}
-          <View style={[globalStyle.center_vh, { height: 50 }]}>
-            <H1>{title}</H1>
-          </View>
+    <Scroll extraMargin={50}>
+      {/* タイトル */}
+      <View style={[globalStyle.center_vh, { height: 50 }]}>
+        <H1>{title}</H1>
+      </View>
 
-          <Hr marginTop={10} />
+      <Hr marginTop={10} />
 
-          {/* タグ & 作成日 */}
-          <View style={[styles.tag_date, { height: 50 }]}>
-            {/* タグ */}
-            <View style={[styles.tags, globalStyle.center_v]}>
-              <Tags tags={tags} />
-            </View>
-            {/* 日付 */}
-            <View style={[globalStyle.center_v, { marginRight: 10 }]}>
-              <Text>{regDate}</Text>
-            </View>
-          </View>
-
-          {/* 画像 */}
-          <Image
-            source={require('../../assets/icons/main.png')}
-            style={{ height: 300, width: '100%' }}
-          />
-
-          <Hr />
-
-          {/* 材料 */}
-          <View style={[globalStyle.center_vh, { height: 50 }]}>
-            <H3>材料</H3>
-          </View>
-
-          {renderIngredients()}
-
-          <Hr marginTop={70} />
-
-          {/* レシピ */}
-          <View style={[globalStyle.center_vh, { height: 50 }]}>
-            <H3>レシピ</H3>
-          </View>
-
-          <View style={globalStyle.center_vh}>
-            <Text>{recipe}</Text>
-          </View>
-
-          <Hr marginTop={70} />
-
-          {/* コメント */}
-          <View style={[globalStyle.center_vh, { height: 50 }]}>
-            <H3>コメント</H3>
-          </View>
-
-          <View style={globalStyle.center_vh}>
-            <Text>{comment}</Text>
-          </View>
+      {/* タグ & 作成日 */}
+      <View style={[styles.tag_date, { height: 50 }]}>
+        {/* タグ */}
+        <View style={[styles.tags, globalStyle.center_v]}>
+          <Tags tags={tags} />
         </View>
-      </Content>
-    </Container>
+        {/* 日付 */}
+        <View style={[globalStyle.center_v, { marginRight: 10 }]}>
+          <Text>{regDate}</Text>
+        </View>
+      </View>
+
+      {/* 画像 */}
+      <Image
+        source={require('../../assets/icons/main.png')}
+        style={{ height: 300, width: '100%' }}
+      />
+
+      <Hr />
+
+      {/* 材料 */}
+      <View style={[globalStyle.center_vh, { height: 50 }]}>
+        <H3>材料</H3>
+      </View>
+
+      {renderIngredients()}
+
+      <Hr marginTop={70} />
+
+      {/* レシピ */}
+      <View style={[globalStyle.center_vh, { height: 50 }]}>
+        <H3>レシピ</H3>
+      </View>
+
+      <View style={globalStyle.center_vh}>
+        <Text>{recipe}</Text>
+      </View>
+
+      <Hr marginTop={70} />
+
+      {/* コメント */}
+      <View style={[globalStyle.center_vh, { height: 50 }]}>
+        <H3>コメント</H3>
+      </View>
+
+      <View style={globalStyle.center_vh}>
+        <Text>{comment}</Text>
+      </View>
+    </Scroll>
   )
 }
 
