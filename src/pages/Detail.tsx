@@ -15,7 +15,7 @@ import { State } from '../../types'
 import globalStyle from '../styles/global'
 
 export default (): JSX.Element => {
-  const height = Dimensions.get('window').height + 20
+  const height = Dimensions.get('window').height + 20 + 50
   const {
     title,
     tags,
@@ -66,7 +66,7 @@ export default (): JSX.Element => {
 
           {/* 画像 */}
           <Image
-            source={{ uri: require('../../assets/icons/main.png') }}
+            source={require('../../assets/icons/main.png')}
             style={{ height: 300, width: '100%' }}
           />
 
