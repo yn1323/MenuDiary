@@ -16,4 +16,17 @@ export default StyleSheet.create({
   content_padding: {
     paddingBottom: 40,
   },
+  center_vh: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  center_v: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  right: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
 })

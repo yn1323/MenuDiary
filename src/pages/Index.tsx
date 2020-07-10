@@ -2,18 +2,22 @@ import * as React from 'react'
 import { StyleSheet } from 'react-native'
 import { Icon, Container } from 'native-base'
 import { useSelector } from 'react-redux'
-import { Router, Scene, Drawer } from 'react-native-router-flux'
+import { Router, Scene, Drawer, Actions } from 'react-native-router-flux'
 import SideBar from '../containers/parts/SideBar'
 import { RouteState } from '../store/routes'
+
+// type
 import { State } from '../types'
 
 // コンポーネント
 import Detail from './Detail'
 import PostEdit from './PostEdit'
 import SearchList from './SearchList'
-import Login from './Login'
+import Login from './Tutorial'
 
+// ドロワーボタン
 import BackButton from '../containers/fragments/BackButton'
+import EditButton from '../containers/fragments/EditButton'
 
 export default (): JSX.Element => {
   const title = 'Menu Diary'
@@ -54,11 +58,12 @@ export default (): JSX.Element => {
             {mapPages()}
           </Drawer>
           {/* タイムラインからの詳細表示 */}
-          <Scene key="Post">
+          <Scene key="Post" initial>
             <Scene
               key="Detail"
               renderLeftButton={BackButton}
               component={Detail}
+              renderRightButton={EditButton}
               initial
             />
             <Scene
