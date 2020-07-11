@@ -4,11 +4,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import main from './main'
 import routes from './routes'
 import post from './post'
+import user from './user'
 
 const reducer = combineReducers({
   main,
   routes,
   post,
+  user,
 })
 
 const store = configureStore({ reducer })
