@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
-import { Icon, Container } from 'native-base'
-import { useSelector } from 'react-redux'
-import { Router, Scene, Drawer, Actions } from 'react-native-router-flux'
+import { Icon, Container, View } from 'native-base'
+import { useSelector, useDispatch } from 'react-redux'
+import { Router, Scene, Drawer } from 'react-native-router-flux'
 import SideBar from '../containers/parts/SideBar'
 import { RouteState } from '../store/routes'
 
@@ -19,10 +19,26 @@ import Login from './Tutorial'
 import BackButton from '../containers/fragments/BackButton'
 import EditButton from '../containers/fragments/EditButton'
 
+// reducer
+import { addTag } from '../store/tag'
+
 export default (): JSX.Element => {
   const title = 'Menu Diary'
+  const dispatch = useDispatch()
   const routes = useSelector((state: State) =>
     state.routes.filter((route: RouteState) => route.showInDrawer),
+  )
+
+  // 個別ファイルに分けられない
+  // react-domがhooksに非対応なので、ここに書く
+  const AddTagButton = (
+    <View style={styles.tagEditMargin} key={0}>
+      <Icon
+        name="add"
+        onPress={() => dispatch(addTag({ tag: '新しいタグ' }))}
+        style={styles.tagEditText}
+      ></Icon>
+    </View>
   )
 
   const mapPages = (): JSX.Element => {
@@ -35,6 +51,7 @@ export default (): JSX.Element => {
             title={title}
             titleStyle={styles.header_text}
             initial={route.initial}
+            renderRightButton={route.key === 'TagEdit' ? AddTagButton : <></>}
           />
         ))}
       </>
@@ -107,5 +124,11 @@ const styles = StyleSheet.create({
   },
   header_text: {
     color: '#eee',
+  },
+  tagEditText: {
+    color: '#eee',
+  },
+  tagEditMargin: {
+    marginRight: 20,
   },
 })

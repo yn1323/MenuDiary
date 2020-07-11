@@ -7,7 +7,7 @@ export type UserState = {
 }
 
 interface Payload {
-  payload: {
+  action: {
     id?: string
     name?: string
     icon?: string
@@ -21,12 +21,12 @@ const initialState: UserState = {
 }
 
 const State = createSlice({
-  name: 'post',
+  name: 'user',
   initialState,
   reducers: {
-    setUserInfo: (state: UserState, info: Payload) => ({
+    setUserInfo: (state: UserState, { action }: Payload) => ({
       ...state,
-      ...{ ...info.payload },
+      ...{ ...action },
     }),
   },
 })
