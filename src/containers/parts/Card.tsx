@@ -11,6 +11,7 @@ import {
   Body,
   Right,
 } from 'native-base'
+import { Actions } from 'react-native-router-flux'
 
 // component
 import Tags from '../fragments/Tags'
@@ -39,9 +40,13 @@ export default memo(
     comments,
     regDate,
   }: Props): JSX.Element => {
+    const showDetail = () => {
+      Actions.Post()
+    }
+
     return (
       <Card>
-        <CardItem style={[globalStyle.background]}>
+        <CardItem style={[globalStyle.background]} button onPress={showDetail}>
           <Left>
             <Thumbnail source={icon} />
             <Body>
@@ -49,10 +54,10 @@ export default memo(
             </Body>
           </Left>
         </CardItem>
-        <CardItem style={[globalStyle.background]}>
+        <CardItem style={[globalStyle.background]} button onPress={showDetail}>
           <Tags tags={tags} />
         </CardItem>
-        <CardItem cardBody>
+        <CardItem cardBody button onPress={showDetail}>
           <Image source={img} style={styles.image} />
         </CardItem>
         <CardItem style={globalStyle.background}>
