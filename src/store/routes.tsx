@@ -28,7 +28,7 @@ const initialState: RouteState[] = [
     title: 'タイムライン',
     component: Timeline,
     key: 'Timeline',
-    initial: true,
+    initial: false,
     selected: true,
     showInDrawer: true,
   },
@@ -94,7 +94,7 @@ const initialState: RouteState[] = [
     key: 'Tutorial',
     initial: false,
     selected: false,
-    showInDrawer: false,
+    showInDrawer: true,
   },
 ]
 
