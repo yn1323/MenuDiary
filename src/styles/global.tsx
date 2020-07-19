@@ -8,7 +8,7 @@ export default StyleSheet.create({
     backgroundColor,
   },
   headline: {
-    color: '#232323',
+    color: '#555',
   },
   paragraph: {
     color: '#222525',

@@ -3,9 +3,16 @@ import { StyleSheet, View } from 'react-native'
 import { Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
+// styles
+import globalStyles from '../../styles/global'
+
 export default (): JSX.Element => (
   <View style={styles.margin}>
-    <Icon name="home" onPress={Actions.pop} style={styles.text}></Icon>
+    <Icon
+      name="arrow-back"
+      onPress={Actions.pop}
+      style={globalStyles.headline}
+    ></Icon>
   </View>
 )
 
