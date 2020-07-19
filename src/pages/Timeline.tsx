@@ -6,6 +6,7 @@ import { Actions } from 'react-native-router-flux'
 // component
 import Card from '../containers/parts/Card'
 import Paginator from '../containers/parts/Paginator'
+
 import globalStyle from '../styles/global'
 
 export default (): JSX.Element => {
@@ -34,10 +35,7 @@ export default (): JSX.Element => {
 
   return (
     <Container>
-      <Content padder style={{ marginBottom: 40 }}>
-        {mapCards()}
-        {renderPaginator()}
-      </Content>
+      <Content padder>{mapCards()}</Content>
     </Container>
   )
 }

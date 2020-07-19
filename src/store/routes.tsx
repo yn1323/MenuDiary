@@ -11,6 +11,7 @@ export type RouteState = {
   component: any
   key: string
   initial: boolean // 初回表示
+  icon: string
 }
 
 type Action = {
@@ -24,24 +25,28 @@ const initialState: RouteState[] = [
     component: Timeline,
     key: 'Timeline',
     initial: true,
-  },
-  {
-    title: '設定',
-    component: Config,
-    key: 'Config',
-    initial: false,
+    icon: 'home',
   },
   {
     title: '編集',
     component: Edit,
     key: 'Edit',
     initial: false,
+    icon: 'create',
   },
   {
-    title: '検索結果',
+    title: '検索',
     component: SearchList,
     key: 'SearchList',
     initial: false,
+    icon: 'search',
+  },
+  {
+    title: '設定',
+    component: Config,
+    key: 'Config',
+    initial: false,
+    icon: 'person',
   },
 ]
 
