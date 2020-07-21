@@ -13,7 +13,7 @@ interface Props {
 type AllProps = Readonly<Props>
 
 export default memo(
-  ({ img, title, regDate }: Props): JSX.Element => {
+  ({ img, title, regDate }: AllProps): JSX.Element => {
     return (
       <Card>
         <CardItem style={styles.card}>
@@ -26,7 +26,7 @@ export default memo(
             </View>
             <View style={styles.dateArea}>
               <Icon name="create" style={styles.dateIcon}></Icon>
-              <Text style={styles.date}> : {regDate}</Text>
+              <Text style={styles.date}> {regDate}</Text>
             </View>
           </View>
         </CardItem>
