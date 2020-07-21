@@ -13,6 +13,7 @@ import TagSelect from './TagSelect'
 
 // ドロワーボタン
 import BackButton from '../containers/fragments/BackButton'
+import EditButton from '../containers/fragments/EditButton'
 
 import globalStyles, { secondary, inactive } from '../styles/global'
 
@@ -60,8 +61,9 @@ export default (): JSX.Element => {
         <Scene key="Detail">
           <Scene
             key="Detail"
-            title="Detail"
+            title="〜レシピ名〜"
             renderLeftButton={BackButton}
+            renderRightButton={EditButton}
             component={Detail}
           />
         </Scene>

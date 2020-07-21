@@ -36,18 +36,18 @@ const initialState: RouteState[] = [
   },
   {
     title: '検索',
-    component: SearchList,
-    key: 'SearchList',
+    component: TagSelect,
+    key: 'TagSelect',
     initial: false,
     icon: 'search',
   },
-  {
-    title: '設定',
-    component: Config,
-    key: 'Config',
-    initial: false,
-    icon: 'person',
-  },
+  // {
+  //   title: '設定',
+  //   component: Config,
+  //   key: 'Config',
+  //   initial: false,
+  //   icon: 'person',
+  // },
 ]
 
 const State = createSlice({

@@ -1,6 +1,10 @@
 import React, { memo, useMemo } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Card, CardItem, Text, Icon, View } from 'native-base'
+import { Actions } from 'react-native-router-flux'
+
+// component
+import RegisterDate from '../fragments/RegisterDate'
 
 import globalStyle, { inactive } from '../../styles/global'
 
@@ -14,28 +18,40 @@ type AllProps = Readonly<Props>
 
 export default memo(
   ({ img, title, regDate }: AllProps): JSX.Element => {
+    const showDetail = () => {
+      Actions.Detail()
+    }
+
     return (
-      <Card>
-        <CardItem style={styles.card}>
-          <View style={styles.cardColumns}>
-            <Image source={img} resizeMode="contain" style={styles.image} />
-            <View
-              style={[globalStyle.center_v, styles.image, styles.titleArea]}
-            >
-              <Text style={styles.title}>{title}</Text>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.touchableOpacity}
+        onPress={() => showDetail()}
+      >
+        <Card>
+          <CardItem style={styles.card}>
+            <View style={styles.cardColumns}>
+              <Image source={img} resizeMode="contain" style={styles.image} />
+              <View
+                style={[globalStyle.center_v, styles.image, styles.titleArea]}
+              >
+                <Text style={styles.title}>{title}</Text>
+              </View>
+              <View style={styles.dateArea}>
+                <RegisterDate regDate={regDate} />
+              </View>
             </View>
-            <View style={styles.dateArea}>
-              <Icon name="create" style={styles.dateIcon}></Icon>
-              <Text style={styles.date}> {regDate}</Text>
-            </View>
-          </View>
-        </CardItem>
-      </Card>
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
     )
   },
 )
 
 const styles = StyleSheet.create({
+  touchableOpacity: {
+    // pointerEvents: 'none',
+  },
   card: {
     paddingLeft: 0,
     paddingRight: 0,

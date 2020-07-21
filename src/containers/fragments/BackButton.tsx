@@ -17,9 +17,6 @@ export default (): JSX.Element => (
 )
 
 const styles = StyleSheet.create({
-  text: {
-    color: '#eee',
-  },
   margin: {
     marginLeft: 20,
   },
