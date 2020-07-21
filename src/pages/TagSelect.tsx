@@ -1,59 +1,54 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
-import { Button, Text, View, Icon } from 'native-base'
-import { useDispatch, useSelector } from 'react-redux'
+import { StyleSheet } from 'react-native'
+import {
+  Icon,
+  Text,
+  List,
+  ListItem,
+  Body,
+  Left,
+  Right,
+  Thumbnail,
+} from 'native-base'
 
-// reducer
-import { delTag, changeTagOrder, TagState } from '../store/tag'
+// constraint
+import { tags } from '../constraints'
 
 // component
 import Scroll from '../templates/Scroll'
 
-// type
-import { State } from '../types/state'
+//global
+import { secondary } from '../styles/global'
 
 export default (): JSX.Element => {
-  const dispatch = useDispatch()
-  const tags = useSelector((state: State) => state.tag)
-
-  const renderTags = () =>
-    tags.map(({ tag, id }: TagState, index: number) => (
-      <View key={id} style={styles.row}>
-        <Button
-          transparent
-          disabled={index === 0}
-          onPress={() =>
-            dispatch(changeTagOrder({ from: index, to: index - 1 }))
-          }
-        >
-          <Icon name="arrow-up" />
-        </Button>
-        <Button
-          transparent
-          disabled={index === tags.length - 1}
-          onPress={() =>
-            dispatch(changeTagOrder({ from: index, to: index + 1 }))
-          }
-        >
-          <Icon name="arrow-down" />
-        </Button>
-        <Button style={{ flexGrow: 20 }}>
-          <Text>{tag}</Text>
-        </Button>
-        <Button transparent onPress={() => dispatch(delTag({ id }))}>
-          <Icon name="trash" />
-        </Button>
-      </View>
-    ))
-
-  return <Scroll disableScroll>{renderTags()}</Scroll>
+  return (
+    <Scroll extraMargin={165}>
+      <List>
+        {tags.map((tag) => {
+          return (
+            <ListItem thumbnail first>
+              <Left>
+                <Thumbnail square source={tag.img} />
+              </Left>
+              <Body>
+                <Text>{tag.tag}</Text>
+              </Body>
+              <Right>
+                <Icon style={styles.arrow} name="arrow-forward"></Icon>
+              </Right>
+            </ListItem>
+          )
+        })}
+      </List>
+    </Scroll>
+  )
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 5,
-    height: 40,
+  list: {
+    paddingBottom: -200,
+  },
+  arrow: {
+    color: secondary,
   },
 })
