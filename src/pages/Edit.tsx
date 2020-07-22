@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Image, Dimensions } from 'react-native'
-import { Text, H1, H3, View, Item, Input, Label, Textarea } from 'native-base'
-import { PostState, Ingredients } from '../store/post'
+import { StyleSheet, Image, TouchableOpacity } from 'react-native'
+import {
+  Button,
+  Text,
+  H3,
+  View,
+  Item,
+  Input,
+  Textarea,
+  Icon,
+} from 'native-base'
 import { useSelector } from 'react-redux'
 
 // component
 import Scroll from '../templates/Scroll'
-import Tags from '../containers/fragments/Tags'
 import Hr from '../containers/fragments/Hr'
-import Dialog from '../templates/Dialog'
+import RegisterDate from '../containers/fragments/RegisterDate'
 // type
 import { State } from '../../types'
 
 // style
-import globalStyle from '../styles/global'
+import globalStyle, { gray } from '../styles/global'
 
+import { now } from '../helpers/common'
 const limits = {
   title: {
     length: 128,
@@ -25,48 +33,24 @@ const limits = {
 }
 
 export default (): JSX.Element => {
-  const [title, setTitle] = useState(
-    useSelector((state: State) => state.post.title),
-  )
-  const [tags, setTags] = useState(
-    useSelector((state: State) => state.post.tags),
-  )
-  const [ingredients, setIngredients] = useState(
-    useSelector((state: State) => state.post.ingredients),
-  )
-  const [img, setImg] = useState(useSelector((state: State) => state.post.img))
-  const [recipe, setRecipe] = useState(
-    useSelector((state: State) => state.post.recipe),
-  )
-  const [comment, setComment] = useState(
-    useSelector((state: State) => state.post.comment),
-  )
-  const [regDate, setRegDate] = useState(
-    useSelector((state: State) => state.post.regDate),
-  )
+  const [title, setTitle] = useState('')
+  const [tag, setTag] = useState('')
+  const [comment, setComment] = useState('')
+  const [image, setImage] = useState('')
+  const regDate = now()
 
-  const renderIngredients = () =>
-    ingredients.map((ingredient: Ingredients, index: number) => (
-      <>
-        <View style={styles.ingredients} key={index}>
-          <View style={globalStyle.right}>
-            <Text>{ingredient.ingredient}</Text>
-          </View>
-          <View style={globalStyle.right}>
-            <Text>{`${ingredient.amount} ${ingredient.unit}`}</Text>
-          </View>
-        </View>
-        <Hr />
-      </>
-    ))
+  const upload = () => {
+    alert('upload Photo')
+  }
 
   return (
     <Scroll extraMargin={50}>
       {/* タイトル */}
       <View style={[globalStyle.center_vh, { height: 50 }]}>
-        <Item>
+        <Item style={{ width: '90%' }}>
+          <Icon name="restaurant" style={styles.titieIcon} />
           <Input
-            placeholder="タイトル"
+            placeholder="料理名"
             value={title}
             onChangeText={(t) => setTitle(t)}
             maxLength={limits.title.length}
@@ -74,58 +58,49 @@ export default (): JSX.Element => {
         </Item>
       </View>
 
-      <Hr marginTop={10} />
-
       {/* タグ & 作成日 */}
-      <View style={[styles.tag_date, { height: 50 }]}>
+      <View style={styles.tagDate}>
         {/* タグ */}
-        <View style={[styles.tags, globalStyle.center_v]}>
-          <Tags tags={tags} />
-        </View>
-        {/* 日付 */}
-        <View style={[globalStyle.center_v, { marginRight: 10 }]}>
-          <Text>{regDate}</Text>
+        <Button small>
+          <Icon name="pricetag" />
+          <Text>{tag || 'タグを選択'}</Text>
+        </Button>
+        <View style={globalStyle.center_v}>
+          <RegisterDate regDate={regDate} />
         </View>
       </View>
 
       {/* 画像 */}
-      <Image
-        source={require('../../assets/icons/main.png')}
-        style={{ height: 300, width: '100%' }}
-      />
-
-      <Hr />
-
-      {/* 材料 */}
-      <View style={[globalStyle.center_vh, { height: 50 }]}>
-        <H3>材料</H3>
+      <View>
+        {image ? (
+          <Image
+            source={require('../../assets/img/meat.jpg')}
+            style={styles.img}
+            resizeMode="contain"
+          />
+        ) : (
+          <TouchableOpacity
+            style={[styles.img, globalStyle.center_vh, styles.noImg]}
+            onPress={() => upload()}
+            activeOpacity={0.9}
+          >
+            <Icon name="camera" style={styles.noImgIcon}></Icon>
+            <Text style={styles.noImgText}>Upload Photo</Text>
+          </TouchableOpacity>
+        )}
       </View>
-
-      {renderIngredients()}
-
-      <Hr marginTop={70} />
-
-      {/* レシピ */}
-      <View style={[globalStyle.center_vh, { height: 50 }]}>
-        <H3>レシピ</H3>
-      </View>
-
-      <View style={globalStyle.center_vh}>
-        <Text>{recipe}</Text>
-      </View>
-
-      <Hr marginTop={70} />
 
       {/* コメント */}
       <View style={[globalStyle.center_vh, { height: 50 }]}>
-        <H3>コメント</H3>
+        <Icon name="thumbs-up" style={styles.titieIcon} />
+        <H3 style={styles.title}> ポイント</H3>
       </View>
 
       <View style={globalStyle.center_vh}>
-        <Item>
+        <Item style={{ width: '90%' }}>
           <Textarea
-            placeholder="コメント"
-            rowSpan={5}
+            placeholder="タップで入力"
+            rowSpan={8}
             value={comment}
             onChangeText={(t) => setComment(t)}
             maxLength={limits.title.length}
@@ -137,8 +112,17 @@ export default (): JSX.Element => {
 }
 
 const styles = StyleSheet.create({
-  tag_date: {
+  titieIcon: {
+    color: gray,
+  },
+  title: {
+    color: gray,
+  },
+  tagDate: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 40,
+    marginTop: 15,
   },
   tags: {
     flexDirection: 'row',
@@ -146,14 +130,18 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   img: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    height: 280,
+    width: '100%',
   },
-  ingredients: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 25,
-    marginTop: 15,
-    paddingHorizontal: 15,
+  noImg: {
+    backgroundColor: '#aaa',
+    flexDirection: 'column',
+  },
+  noImgText: {
+    color: '#ddd',
+  },
+  noImgIcon: {
+    color: '#ddd',
+    fontSize: 100,
   },
 })

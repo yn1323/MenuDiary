@@ -9,8 +9,8 @@ import globalStyles, { primary } from '../../styles/global'
 export default (): JSX.Element => (
   <View style={styles.margin}>
     <Icon
-      name="create"
-      onPress={Actions.Edit}
+      name="checkmark"
+      onPress={Actions.Timeline}
       style={[globalStyles.headline, styles.text]}
     ></Icon>
   </View>

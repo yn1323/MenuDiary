@@ -14,6 +14,7 @@ import TagSelect from './TagSelect'
 // ドロワーボタン
 import BackButton from '../containers/fragments/BackButton'
 import EditButton from '../containers/fragments/EditButton'
+import SaveButton from '../containers/fragments/SaveButton'
 
 import globalStyles, { secondary, inactive } from '../styles/global'
 
@@ -46,6 +47,7 @@ export default (): JSX.Element => {
                 style={{ color: focused ? secondary : inactive }}
               />
             )}
+            renderRightButton={route.key === 'Edit' ? SaveButton : <></>}
           />
         ))}
       </Tabs>

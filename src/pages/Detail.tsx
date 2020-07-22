@@ -14,7 +14,6 @@ import { State } from '../../types'
 
 // style
 import globalStyle, { secondary } from '../styles/global'
-import global from '../styles/global'
 
 export default (): JSX.Element => {
   const { tag, img, comment, regDate } = useSelector(
@@ -37,7 +36,7 @@ export default (): JSX.Element => {
           <Icon name="pricetag" />
           <Text>{tag}</Text>
         </Button>
-        <View style={global.center_v}>
+        <View style={globalStyle.center_v}>
           <RegisterDate regDate={regDate} />
         </View>
       </View>
