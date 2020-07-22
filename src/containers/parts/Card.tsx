@@ -1,93 +1,90 @@
 import React, { memo, useMemo } from 'react'
-import { Image, StyleSheet } from 'react-native'
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-} from 'native-base'
+import { Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { Card, CardItem, Text, Icon, View } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
 // component
-import Tags from '../fragments/Tags'
+import RegisterDate from '../fragments/RegisterDate'
 
-import globalStyle from '../../styles/global'
+import globalStyle, { inactive } from '../../styles/global'
 
 interface Props {
-  icon: string
   img: string
-  menuName: string
-  tags: string[]
-  likes: number
-  comments: string[]
+  title: string
   regDate: string
 }
 
 type AllProps = Readonly<Props>
 
 export default memo(
-  ({
-    icon,
-    img,
-    menuName,
-    tags,
-    likes,
-    comments,
-    regDate,
-  }: Props): JSX.Element => {
+  ({ img, title, regDate }: AllProps): JSX.Element => {
     const showDetail = () => {
-      Actions.Post()
+      Actions.Detail()
     }
 
     return (
-      <Card>
-        <CardItem style={[globalStyle.background]} button onPress={showDetail}>
-          <Left>
-            <Thumbnail source={icon} />
-            <Body>
-              <Text>{menuName}</Text>
-            </Body>
-          </Left>
-        </CardItem>
-        <CardItem style={[globalStyle.background]} button onPress={showDetail}>
-          <Tags tags={tags} />
-        </CardItem>
-        <CardItem cardBody button onPress={showDetail}>
-          <Image source={img} style={styles.image} />
-        </CardItem>
-        <CardItem style={globalStyle.background}>
-          <Left>
-            <Button transparent>
-              <Icon active name="thumbs-up" />
-              <Text>{likes}</Text>
-            </Button>
-          </Left>
-          <Left>
-            <Button transparent>
-              <Icon active name="chatbubbles" />
-              <Text>{comments.length}</Text>
-            </Button>
-          </Left>
-          <Right>
-            <Text>{regDate}</Text>
-          </Right>
-        </CardItem>
-      </Card>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.touchableOpacity}
+        onPress={() => showDetail()}
+      >
+        <Card>
+          <CardItem style={styles.card}>
+            <View style={styles.cardColumns}>
+              <Image source={img} resizeMode="contain" style={styles.image} />
+              <View
+                style={[globalStyle.center_v, styles.image, styles.titleArea]}
+              >
+                <Text style={styles.title}>{title}</Text>
+              </View>
+              <View style={styles.dateArea}>
+                <RegisterDate regDate={regDate} />
+              </View>
+            </View>
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
     )
   },
 )
 
 const styles = StyleSheet.create({
-  image: {
-    height: 250,
-    flex: 1,
+  touchableOpacity: {
+    // pointerEvents: 'none',
   },
-  btn: {
-    marginRight: 5,
+  card: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  image: {
+    height: 150,
+    width: 150,
+  },
+  cardColumns: {
+    flexDirection: 'row',
+  },
+  dateArea: {
+    position: 'absolute',
+    bottom: 5,
+    right: 10,
+    flexDirection: 'row',
+  },
+  dateIcon: {
+    fontSize: 15,
+    color: inactive,
+  },
+  date: {
+    fontSize: 12,
+    color: inactive,
+  },
+  titleArea: {
+    flexGrow: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  title: {
+    textAlign: 'left',
   },
 })

@@ -4,20 +4,23 @@ import { Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
 // styles
-import globalStyles from '../../styles/global'
+import globalStyles, { primary } from '../../styles/global'
 
 export default (): JSX.Element => (
   <View style={styles.margin}>
     <Icon
-      name="arrow-back"
-      onPress={Actions.pop}
-      style={globalStyles.headline}
+      name="checkmark"
+      onPress={Actions.Timeline}
+      style={[globalStyles.headline, styles.text]}
     ></Icon>
   </View>
 )
 
 const styles = StyleSheet.create({
   margin: {
-    marginLeft: 20,
+    marginRight: 20,
+  },
+  text: {
+    color: primary,
   },
 })

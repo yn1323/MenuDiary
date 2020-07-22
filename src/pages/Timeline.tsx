@@ -4,8 +4,10 @@ import { Actions } from 'react-native-router-flux'
 // import { moduleName } from 'react-redux';
 
 // component
+import Scroll from '../templates/Scroll'
 import Card from '../containers/parts/Card'
 import Paginator from '../containers/parts/Paginator'
+
 import globalStyle from '../styles/global'
 
 export default (): JSX.Element => {
@@ -15,11 +17,9 @@ export default (): JSX.Element => {
         {testData.map((d, index) => (
           <Card
             key={index}
-            icon={d.icon}
             img={d.img}
-            menuName={d.menuName}
+            title={d.title}
             tags={d.tags}
-            likes={d.likes}
             comments={d.comments}
             regDate={d.regDate}
           />
@@ -32,51 +32,43 @@ export default (): JSX.Element => {
     return <Paginator from={1} to={4} all={30} />
   }, [])
 
-  return (
-    <Container>
-      <Content padder style={{ marginBottom: 40 }}>
-        {mapCards()}
-        {renderPaginator()}
-      </Content>
-    </Container>
-  )
+  return <Scroll>{mapCards()}</Scroll>
 }
 
 const testData = [
   {
-    icon: require('../../assets/icons/main.png'),
     img: require('../../assets/icons/main.png'),
-    menuName: 'メニュー名',
-    tags: ['ランチ', '肉', 'かんたん！'],
-    likes: 15,
-    comments: ['OK', 'oishii'],
+    title: 'メニュー名',
+    tags: '肉',
+    comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    icon: require('../../assets/icons/main.png'),
     img: require('../../assets/icons/main.png'),
-    menuName: 'メニュー名',
-    tags: ['ランチ', '肉', 'かんたん！'],
-    likes: 15,
-    comments: ['OK', 'oishii'],
+    title: 'メニューdsadasd名',
+    tags: '肉',
+    comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    icon: require('../../assets/icons/main.png'),
     img: require('../../assets/icons/main.png'),
-    menuName: 'メニュー名',
-    tags: ['ランチ', '肉', 'かんたん！'],
-    likes: 15,
-    comments: ['OK', 'oishii'],
+    title: 'メニュdsaddddddddddddー名',
+    tags: '肉',
+    comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    icon: require('../../assets/icons/main.png'),
     img: require('../../assets/icons/main.png'),
-    menuName: 'メニュー名',
-    tags: ['ランチ', '肉', 'かんたん！'],
-    likes: 15,
-    comments: ['OK', 'oishii'],
+    title: 'メニュー名',
+    tags: '肉',
+    comments: 'aaa',
+    regDate: '2020/07/05',
+  },
+  {
+    img: require('../../assets/icons/main.png'),
+    title: 'メニュー名',
+    tags: '肉',
+    comments: 'aaa',
     regDate: '2020/07/05',
   },
 ]
