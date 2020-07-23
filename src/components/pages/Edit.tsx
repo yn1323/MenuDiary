@@ -12,21 +12,15 @@ import {
 } from 'native-base'
 
 // component
+import Hr from '../atoms/Hr'
 import Scroll from '../templates/Scroll'
 import RegisterDate from '../molecules/RegisterDate'
-
+import CommentHeadline from '../molecules/CommentHeadline'
+import PhotoUpload from '../molecules/PhotoUpload'
 // style
 import globalStyle, { gray } from '../../styles/global'
 
 import { now } from '../../helpers/common'
-const limits = {
-  title: {
-    length: 128,
-  },
-  comment: {
-    length: 1280,
-  },
-}
 
 export default (): JSX.Element => {
   const [title, setTitle] = useState('')
@@ -34,10 +28,6 @@ export default (): JSX.Element => {
   const [comment, setComment] = useState('')
   const [image, setImage] = useState('')
   const regDate = now()
-
-  const upload = () => {
-    alert('upload Photo')
-  }
 
   return (
     <Scroll extraMargin={50}>
@@ -49,7 +39,7 @@ export default (): JSX.Element => {
             placeholder="料理名"
             value={title}
             onChangeText={(t) => setTitle(t)}
-            maxLength={limits.title.length}
+            maxLength={128}
           />
         </Item>
       </View>
@@ -75,22 +65,13 @@ export default (): JSX.Element => {
             resizeMode="contain"
           />
         ) : (
-          <TouchableOpacity
-            style={[styles.img, globalStyle.center_vh, styles.noImg]}
-            onPress={() => upload()}
-            activeOpacity={0.9}
-          >
-            <Icon name="camera" style={styles.noImgIcon}></Icon>
-            <Text style={styles.noImgText}>Upload Photo</Text>
-          </TouchableOpacity>
+          <PhotoUpload />
         )}
       </View>
 
+      <Hr marginBottom={10} marginTop={10} />
       {/* コメント */}
-      <View style={[globalStyle.center_vh, { height: 50 }]}>
-        <Icon name="thumbs-up" style={styles.titieIcon} />
-        <H3 style={styles.title}> ポイント</H3>
-      </View>
+      <CommentHeadline />
 
       <View style={globalStyle.center_vh}>
         <Item style={{ width: '90%' }}>
@@ -99,7 +80,7 @@ export default (): JSX.Element => {
             rowSpan={8}
             value={comment}
             onChangeText={(t) => setComment(t)}
-            maxLength={limits.title.length}
+            maxLength={1280}
           />
         </Item>
       </View>
@@ -128,16 +109,5 @@ const styles = StyleSheet.create({
   img: {
     height: 280,
     width: '100%',
-  },
-  noImg: {
-    backgroundColor: '#aaa',
-    flexDirection: 'column',
-  },
-  noImgText: {
-    color: '#ddd',
-  },
-  noImgIcon: {
-    color: '#ddd',
-    fontSize: 100,
   },
 })

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import Scroll from '../templates/Scroll'
 import RegisterDate from '../molecules/RegisterDate'
 import Hr from '../atoms/Hr'
+import CommentHeadline from '../molecules/CommentHeadline'
 
 // type
 import { State } from '../../types'
@@ -43,12 +44,7 @@ export default (): JSX.Element => {
 
       <Hr marginTop={10} marginBottom={10} />
       {/* コメント */}
-      <View
-        style={[globalStyle.center_vh, { height: 50 }, styles.headlineArea]}
-      >
-        <Icon name="thumbs-up" style={styles.headline} />
-        <H3 style={styles.headline}> ポイント</H3>
-      </View>
+      <CommentHeadline />
 
       <View style={globalStyle.center_vh}>
         <View style={styles.comment}>

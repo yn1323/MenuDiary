@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import {
   Icon,
   Text,
@@ -21,12 +21,16 @@ import Scroll from '../templates/Scroll'
 import { secondary } from '../../styles/global'
 
 export default (): JSX.Element => {
+  const commit = (tag: string) => {
+    alert(`clicked: ${tag}`)
+  }
+
   return (
     <Scroll extraMargin={165}>
       <List>
         {tags.map((tag) => {
           return (
-            <ListItem thumbnail first>
+            <ListItem thumbnail first onPress={() => commit(tag.tag)}>
               <Left>
                 <Thumbnail square source={tag.img} />
               </Left>

@@ -10,14 +10,7 @@ export default (): JSX.Element => {
       {
         <>
           {testData.map((d, index) => (
-            <Card
-              key={index}
-              img={d.img}
-              title={d.title}
-              tags={d.tags}
-              comments={d.comments}
-              regDate={d.regDate}
-            />
+            <Card key={index} img={d.img} title={d.title} regDate={d.regDate} />
           ))}
         </>
       }
