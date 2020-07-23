@@ -1,9 +1,8 @@
-import { MainState, RouteState, PostState, UserState, TagState } from '../store'
+import { RouteState, PostState, UserState, EditState } from '../store'
 
 export interface State {
-  main: MainState
   routes: RouteState[]
-  post: PostState
+  post: PostState[]
   user: UserState
-  tag: TagState[]
+  edit: EditState
 }

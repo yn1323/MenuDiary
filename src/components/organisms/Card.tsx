@@ -1,6 +1,7 @@
-import React, { memo, useMemo } from 'react'
+import React, { memo } from 'react'
+import { useDispatch } from 'react-redux'
 import { Image, StyleSheet, TouchableOpacity } from 'react-native'
-import { Card, CardItem, Text, Icon, View } from 'native-base'
+import { Card, CardItem, Text, View } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
 // component
@@ -8,18 +9,26 @@ import RegisterDate from '../molecules/RegisterDate'
 
 import globalStyle, { inactive } from '../../styles/global'
 
+import { PostState } from '../../store'
+
+import { setEdit } from '../../store/edit'
+
 interface Props {
   uri: string
   title: string
   regDate: string
+  allInfo: PostState
 }
 
 type AllProps = Readonly<Props>
 
 export default memo(
-  ({ uri, title, regDate }: AllProps): JSX.Element => {
+  ({ uri, title, regDate, allInfo }: AllProps): JSX.Element => {
+    const dispatch = useDispatch()
     const showDetail = () => {
-      Actions.Detail()
+      // storeにセット
+      dispatch(setEdit(allInfo))
+      Actions.Detail({ title })
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Image } from 'react-native'
-import { Text, Button, Icon, H3, View } from 'native-base'
-import { PostState } from '../../store/post'
+import { Text, Button, Icon, View } from 'native-base'
+import { EditState } from '../../store/edit'
 import { useSelector } from 'react-redux'
 
 // component
@@ -17,9 +17,10 @@ import { State } from '../../types'
 import globalStyle, { secondary } from '../../styles/global'
 
 export default (): JSX.Element => {
-  const { tag, img, comment, regDate } = useSelector(
-    (state: State): PostState => state.post,
+  const { tag, uri, comment, regDate } = useSelector(
+    (state: State): EditState => state.edit,
   )
+  console.log(useSelector((state) => state.edit))
 
   return (
     <Scroll disableScroll>

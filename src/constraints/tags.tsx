@@ -1,4 +1,27 @@
-export const tags = [
+export type Tag =
+  | '定番'
+  | '肉のおかず'
+  | '魚のおかず'
+  | '野菜のおかず'
+  | '卵のおかず'
+  | '海藻類のおかず'
+  | '大豆加工品のおかず'
+  | '保存食のおかず'
+  | '乳製品のおかず'
+  | 'サラダ'
+  | 'スープ・汁もの'
+  | 'ご飯もの'
+  | '丼もの'
+  | '鍋もの'
+  | '麺料理'
+  | 'その他'
+
+interface Tags {
+  tag: Tag
+  [key: string]: any
+}
+
+export const tags: Tags[] = [
   {
     tag: '定番',
     img: require('../../assets/img/popular.jpg'),

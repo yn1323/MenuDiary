@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import { Icon } from 'native-base'
+import { Icon, Text } from 'native-base'
 import { Router, Scene, Tabs } from 'react-native-router-flux'
 import { RouteState } from '../../store/routes'
 
@@ -9,7 +9,6 @@ import { State } from '../../types'
 
 // コンポーネント
 import Detail from './Detail'
-import TagSelect from './TagSelect'
 
 // ドロワーボタン
 import BackButton from '../atoms/BackButton'
@@ -62,7 +61,6 @@ export default (): JSX.Element => {
         <Scene key="Detail">
           <Scene
             key="Detail"
-            title="〜レシピ名〜"
             renderLeftButton={BackButton}
             renderRightButton={EditButton}
             component={Detail}
