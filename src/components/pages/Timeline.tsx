@@ -10,45 +10,45 @@ export default (): JSX.Element => {
       {
         <>
           {testData.map((d, index) => (
-            <Card key={index} img={d.img} title={d.title} regDate={d.regDate} />
+            <Card key={index} uri={d.uri} title={d.title} regDate={d.regDate} />
           ))}
         </>
       }
     </Scroll>
   )
 }
-
+// const str = () => require('https://reactnative.dev/img/header_logo.png')
 const testData = [
   {
-    img: require('../../../assets/icons/main.png'),
+    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
     title: 'メニュー名',
     tags: '肉',
     comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    img: require('../../../assets/icons/main.png'),
+    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
     title: 'メニューdsadasd名',
     tags: '肉',
     comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    img: require('../../../assets/icons/main.png'),
+    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
     title: 'メニュdsaddddddddddddー名',
     tags: '肉',
     comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    img: require('../../../assets/icons/main.png'),
+    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
     title: 'メニュー名',
     tags: '肉',
     comments: 'aaa',
     regDate: '2020/07/05',
   },
   {
-    img: require('../../../assets/icons/main.png'),
+    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
     title: 'メニュー名',
     tags: '肉',
     comments: 'aaa',

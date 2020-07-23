@@ -9,7 +9,7 @@ import RegisterDate from '../molecules/RegisterDate'
 import globalStyle, { inactive } from '../../styles/global'
 
 interface Props {
-  img: string
+  uri: string
   title: string
   regDate: string
 }
@@ -17,7 +17,7 @@ interface Props {
 type AllProps = Readonly<Props>
 
 export default memo(
-  ({ img, title, regDate }: AllProps): JSX.Element => {
+  ({ uri, title, regDate }: AllProps): JSX.Element => {
     const showDetail = () => {
       Actions.Detail()
     }
@@ -31,7 +31,12 @@ export default memo(
         <Card>
           <CardItem style={styles.card}>
             <View style={styles.cardColumns}>
-              <Image source={img} resizeMode="contain" style={styles.image} />
+              {/* <Image source={img} resizeMode="contain" style={styles.image} /> */}
+              <Image
+                source={{ uri: uri }}
+                resizeMode="contain"
+                style={[styles.image, { backgroundColor: 'lightblue' }]}
+              />
               <View
                 style={[globalStyle.center_v, styles.image, styles.titleArea]}
               >
