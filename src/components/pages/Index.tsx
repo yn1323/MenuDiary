@@ -2,21 +2,21 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'native-base'
 import { Router, Scene, Tabs } from 'react-native-router-flux'
-import { RouteState } from '../store/routes'
+import { RouteState } from '../../store/routes'
 
 // type
-import { State } from '../types'
+import { State } from '../../types'
 
 // コンポーネント
 import Detail from './Detail'
 import TagSelect from './TagSelect'
 
 // ドロワーボタン
-import BackButton from '../containers/fragments/BackButton'
-import EditButton from '../containers/fragments/EditButton'
-import SaveButton from '../containers/fragments/SaveButton'
+import BackButton from '../atoms/BackButton'
+import EditButton from '../atoms/EditButton'
+import SaveButton from '../atoms/SaveButton'
 
-import globalStyles, { secondary, inactive } from '../styles/global'
+import globalStyles, { secondary, inactive } from '../../styles/global'
 
 export default (): JSX.Element => {
   const routes = useSelector((state: State) => state.routes)
@@ -27,7 +27,6 @@ export default (): JSX.Element => {
         key="main"
         swipeEnabled
         animationEnabled
-        // tabBarStyle={{ backgroundColor: '#F8F8F8' }}
         activeTintColor={secondary}
         inactiveTintColor={inactive}
       >

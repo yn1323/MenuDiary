@@ -12,13 +12,13 @@ import {
 } from 'native-base'
 
 // constraint
-import { tags } from '../constraints'
+import { tags } from '../../constraints'
 
 // component
 import Scroll from '../templates/Scroll'
 
 //global
-import { secondary } from '../styles/global'
+import { secondary } from '../../styles/global'
 
 export default (): JSX.Element => {
   return (

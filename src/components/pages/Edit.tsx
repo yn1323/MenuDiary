@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Image, TouchableOpacity } from 'react-native'
 import {
   Button,
@@ -10,19 +10,15 @@ import {
   Textarea,
   Icon,
 } from 'native-base'
-import { useSelector } from 'react-redux'
 
 // component
 import Scroll from '../templates/Scroll'
-import Hr from '../containers/fragments/Hr'
-import RegisterDate from '../containers/fragments/RegisterDate'
-// type
-import { State } from '../../types'
+import RegisterDate from '../molecules/RegisterDate'
 
 // style
-import globalStyle, { gray } from '../styles/global'
+import globalStyle, { gray } from '../../styles/global'
 
-import { now } from '../helpers/common'
+import { now } from '../../helpers/common'
 const limits = {
   title: {
     length: 128,
@@ -74,7 +70,7 @@ export default (): JSX.Element => {
       <View>
         {image ? (
           <Image
-            source={require('../../assets/img/meat.jpg')}
+            source={require('../../../assets/img/meat.jpg')}
             style={styles.img}
             resizeMode="contain"
           />

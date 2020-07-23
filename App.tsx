@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import * as Font from 'expo-font'
-import { AppLoading } from 'expo'
 
 // Fonts
 import Roboto from './node_modules/native-base/Fonts/Roboto.ttf'
@@ -11,8 +10,8 @@ import { Provider } from 'react-redux'
 import store from './src/store'
 
 // component
-import Index from './src/pages/Index'
-import Loading from './src/pages/Loading'
+import Index from './src/components/pages/Index'
+import Loading from './src/components/pages/Loading'
 
 // カスタムテーマ
 import getTheme from './native-base-theme/components'

@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Image, ScrollView, Dimensions } from 'react-native'
+import React from 'react'
+import { StyleSheet, Image } from 'react-native'
 import { Text, Button, Icon, H3, View } from 'native-base'
-import { PostState, Ingredients } from '../store/post'
+import { PostState } from '../../store/post'
 import { useSelector } from 'react-redux'
 
 // component
 import Scroll from '../templates/Scroll'
-import RegisterDate from '../containers/fragments/RegisterDate'
-import Hr from '../containers/fragments/Hr'
+import RegisterDate from '../molecules/RegisterDate'
+import Hr from '../atoms/Hr'
 
 // type
 import { State } from '../../types'
 
 // style
-import globalStyle, { secondary } from '../styles/global'
+import globalStyle, { secondary } from '../../styles/global'
 
 export default (): JSX.Element => {
   const { tag, img, comment, regDate } = useSelector(
@@ -24,7 +24,7 @@ export default (): JSX.Element => {
     <Scroll disableScroll>
       {/* 画像 */}
       <Image
-        source={require('../../assets/img/meat.jpg')}
+        source={require('../../../assets/img/meat.jpg')}
         style={{ height: 280, width: '100%' }}
         resizeMode="contain"
       />

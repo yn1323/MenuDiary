@@ -4,7 +4,7 @@ import { Card, CardItem, Text, Icon, View } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
 // component
-import RegisterDate from '../fragments/RegisterDate'
+import RegisterDate from '../molecules/RegisterDate'
 
 import globalStyle, { inactive } from '../../styles/global'
 

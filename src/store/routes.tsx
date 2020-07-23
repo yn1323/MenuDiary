@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Config from '../pages/Config'
-import Detail from '../pages/Detail'
-import Edit from '../pages/Edit'
-import SearchList from '../pages/SearchResult'
-import TagSelect from '../pages/TagSelect'
-import Timeline from '../pages/Timeline'
+import Config from '../components/pages/Config'
+import Detail from '../components/pages/Detail'
+import Edit from '../components/pages/Edit'
+import SearchList from '../components/pages/SearchResult'
+import TagSelect from '../components/pages/TagSelect'
+import Timeline from '../components/pages/Timeline'
 
 export type RouteState = {
   title: string // メニューに表示
