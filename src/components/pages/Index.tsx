@@ -34,7 +34,7 @@ export default (): JSX.Element => {
           <Scene
             key={route.key}
             component={route.component}
-            title={route.key}
+            title={route.title}
             titleStyle={globalStyles.headline}
             initial={route.initial}
             tabBarLabel={route.title}
@@ -66,14 +66,6 @@ export default (): JSX.Element => {
             renderLeftButton={BackButton}
             renderRightButton={EditButton}
             component={Detail}
-          />
-        </Scene>
-        <Scene key="TagSelect">
-          <Scene
-            key="TagSelect"
-            title="TagSelect"
-            renderLeftButton={BackButton}
-            component={TagSelect}
           />
         </Scene>
       </Scene>

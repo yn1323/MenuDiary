@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet } from 'react-native'
 import {
   Icon,
   Text,
@@ -28,9 +28,9 @@ export default (): JSX.Element => {
   return (
     <Scroll extraMargin={165}>
       <List>
-        {tags.map((tag) => {
+        {tags.map((tag, i) => {
           return (
-            <ListItem thumbnail first onPress={() => commit(tag.tag)}>
+            <ListItem key={i} thumbnail first onPress={() => commit(tag.tag)}>
               <Left>
                 <Thumbnail square source={tag.img} />
               </Left>
