@@ -1,6 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { reset } from '../../store/edit'
+import { useSelector } from 'react-redux'
 
 // component
 import Scroll from '../templates/Scroll'
@@ -11,10 +10,6 @@ import { State } from '../../types'
 import { PostState } from '../../store/post'
 
 export default (): JSX.Element => {
-  const dispatch = useDispatch()
-  // 編集を空にする
-  dispatch(reset())
-
   const posts = useSelector((state: State) => state.post)
 
   return (

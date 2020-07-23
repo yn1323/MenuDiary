@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import Config from '../components/pages/Config'
-import Detail from '../components/pages/Detail'
 import Edit from '../components/pages/Edit'
-import SearchList from '../components/pages/SearchResult'
 import TagSelect from '../components/pages/TagSelect'
 import Timeline from '../components/pages/Timeline'
 

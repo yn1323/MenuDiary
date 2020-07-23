@@ -20,7 +20,6 @@ export default (): JSX.Element => {
   const { tag, uri, comment, regDate } = useSelector(
     (state: State): EditState => state.edit,
   )
-  console.log(useSelector((state) => state.edit))
 
   return (
     <Scroll disableScroll>

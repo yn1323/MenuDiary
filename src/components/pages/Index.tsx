@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
-import { Icon, Text } from 'native-base'
-import { Router, Scene, Tabs } from 'react-native-router-flux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Icon } from 'native-base'
+import { Router, Scene, Tabs, Actions } from 'react-native-router-flux'
 import { RouteState } from '../../store/routes'
 
 // type
@@ -17,9 +17,16 @@ import SaveButton from '../atoms/SaveButton'
 
 import globalStyles, { secondary, inactive } from '../../styles/global'
 
+import { reset } from '../../store/edit'
+
 export default (): JSX.Element => {
+  const dispatch = useDispatch()
   const routes = useSelector((state: State) => state.routes)
 
+  const pressTab = ({ navigation }) => {
+    // if (navigation.state.key === 'Edit') dispatch(reset())
+    Actions[navigation.state.key]()
+  }
   const mapPages = (): JSX.Element => {
     return (
       <Tabs
@@ -28,6 +35,7 @@ export default (): JSX.Element => {
         animationEnabled
         activeTintColor={secondary}
         inactiveTintColor={inactive}
+        tabBarOnPress={(t: any) => pressTab(t)}
       >
         {routes.map((route: RouteState) => (
           <Scene

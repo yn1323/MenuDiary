@@ -18,7 +18,7 @@ const initialState: EditState = {
   regDate: '2020-07-15',
 }
 
-const empty: EditState = {
+export const empty: EditState = {
   id: '',
   uri: '',
   title: '',

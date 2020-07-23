@@ -1,15 +1,7 @@
-import React, { useState } from 'react'
-import { StyleSheet, Image, TouchableOpacity } from 'react-native'
-import {
-  Button,
-  Text,
-  H3,
-  View,
-  Item,
-  Input,
-  Textarea,
-  Icon,
-} from 'native-base'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { StyleSheet, Image } from 'react-native'
+import { Button, Text, View, Item, Input, Textarea, Icon } from 'native-base'
 
 // component
 import Hr from '../atoms/Hr'
@@ -20,14 +12,35 @@ import PhotoUpload from '../molecules/PhotoUpload'
 // style
 import globalStyle, { gray } from '../../styles/global'
 
-import { now } from '../../helpers/common'
+import { State } from '../../types'
 
-export default (): JSX.Element => {
-  const [title, setTitle] = useState('')
-  const [tag, setTag] = useState('')
-  const [comment, setComment] = useState('')
-  const [image, setImage] = useState('')
+import { now } from '../../helpers/common'
+import { setEdit } from '../../store/edit'
+
+export default (props): JSX.Element => {
+  console.log(props)
+  const dispatch = useDispatch()
+  const store = useSelector((state: State) => state.edit)
+
+  const [title, setTitle] = useState(store.title)
+  const [tag, setTag] = useState(store.tag)
+  const [comment, setComment] = useState(store.comment)
+  const [uri, setUri] = useState(store.uri)
   const regDate = now()
+
+  // 編集時
+  useEffect(() => {
+    dispatch(
+      setEdit({
+        id: '3',
+        title,
+        uri,
+        comment,
+        tag,
+        regDate,
+      }),
+    )
+  }, [title, tag, comment, uri])
 
   return (
     <Scroll extraMargin={50}>
@@ -58,7 +71,7 @@ export default (): JSX.Element => {
 
       {/* 画像 */}
       <View>
-        {image ? (
+        {uri ? (
           <Image
             source={require('../../../assets/img/meat.jpg')}
             style={styles.img}
