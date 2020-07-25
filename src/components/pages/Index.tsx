@@ -24,7 +24,7 @@ export default (): JSX.Element => {
   const routes = useSelector((state: State) => state.routes)
 
   const pressTab = ({ navigation }) => {
-    // if (navigation.state.key === 'Edit') dispatch(reset())
+    if (navigation.state.key === 'Edit') dispatch(reset())
     Actions[navigation.state.key]()
   }
   const mapPages = (): JSX.Element => {

@@ -17,16 +17,22 @@ import { State } from '../../types'
 import { now } from '../../helpers/common'
 import { setEdit } from '../../store/edit'
 
-export default (props): JSX.Element => {
-  console.log(props)
+export default (): JSX.Element => {
   const dispatch = useDispatch()
   const store = useSelector((state: State) => state.edit)
-
   const [title, setTitle] = useState(store.title)
   const [tag, setTag] = useState(store.tag)
   const [comment, setComment] = useState(store.comment)
   const [uri, setUri] = useState(store.uri)
   const regDate = now()
+
+  // 2回目以降useStateで正しくセットされないため
+  if (title !== store.title) {
+    setTitle(store.title)
+    setTag(store.tag)
+    setComment(store.comment)
+    setUri(store.uri)
+  }
 
   // 編集時
   useEffect(() => {
