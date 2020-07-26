@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Animated, View, Dimensions, StyleSheet } from 'react-native'
 import { Button, Text, H2, Input, Item } from 'native-base'
 
-import Hr from '../containers/fragments/Hr'
+import Hr from '../atoms/Hr'
 
 const height = Dimensions.get('window').height
 

@@ -1,30 +1,31 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Image, ScrollView, Dimensions } from 'react-native'
-import { Text, Button, Icon, H3, View } from 'native-base'
-import { PostState, Ingredients } from '../store/post'
+import React from 'react'
+import { StyleSheet, Image } from 'react-native'
+import { Text, Button, Icon, View } from 'native-base'
+import { EditState } from '../../store/edit'
 import { useSelector } from 'react-redux'
 
 // component
 import Scroll from '../templates/Scroll'
-import RegisterDate from '../containers/fragments/RegisterDate'
-import Hr from '../containers/fragments/Hr'
+import RegisterDate from '../molecules/RegisterDate'
+import Hr from '../atoms/Hr'
+import CommentHeadline from '../molecules/CommentHeadline'
 
 // type
 import { State } from '../../types'
 
 // style
-import globalStyle, { secondary } from '../styles/global'
+import globalStyle, { secondary } from '../../styles/global'
 
 export default (): JSX.Element => {
-  const { tag, img, comment, regDate } = useSelector(
-    (state: State): PostState => state.post,
+  const { tag, uri, comment, regDate } = useSelector(
+    (state: State): EditState => state.edit,
   )
 
   return (
     <Scroll disableScroll>
       {/* 画像 */}
       <Image
-        source={require('../../assets/img/meat.jpg')}
+        source={require('../../../assets/img/meat.jpg')}
         style={{ height: 280, width: '100%' }}
         resizeMode="contain"
       />
@@ -43,12 +44,7 @@ export default (): JSX.Element => {
 
       <Hr marginTop={10} marginBottom={10} />
       {/* コメント */}
-      <View
-        style={[globalStyle.center_vh, { height: 50 }, styles.headlineArea]}
-      >
-        <Icon name="thumbs-up" style={styles.headline} />
-        <H3 style={styles.headline}> ポイント</H3>
-      </View>
+      <CommentHeadline />
 
       <View style={globalStyle.center_vh}>
         <View style={styles.comment}>

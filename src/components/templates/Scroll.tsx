@@ -5,7 +5,6 @@ import { Container, Content, View } from 'native-base'
 interface Props {
   extraMargin?: number
   disableScroll?: boolean
-  // bgColor?: string
   children: JSX.Element[] | JSX.Element
 }
 
@@ -15,8 +14,7 @@ export default ({
   extraMargin = 0,
   children,
   disableScroll = false,
-}: // bgColor = '#ffffff00',
-AllProps): JSX.Element => {
+}: AllProps): JSX.Element => {
   const height = Dimensions.get('window').height + 20 + extraMargin
 
   return (

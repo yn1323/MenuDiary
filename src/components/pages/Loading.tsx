@@ -3,7 +3,7 @@ import { StyleSheet, Image, Dimensions } from 'react-native'
 import { Container, Content, H1, View } from 'native-base'
 
 // style
-import globalStyle, { backgroundColor, secondary } from '../styles/global'
+import globalStyle, { backgroundColor, secondary } from '../../styles/global'
 
 const title = 'Menu Diary'
 const circleSize = 150
@@ -23,7 +23,7 @@ export default (): JSX.Element => {
             {/* アイコン */}
             <View style={[styles.circle, globalStyle.center_vh]}>
               <Image
-                source={require('../../assets/icons/pan.png')}
+                source={require('../../../assets/icons/pan.png')}
                 style={styles.image}
               />
             </View>

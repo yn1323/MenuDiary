@@ -1,41 +1,50 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Icon } from 'native-base'
-import { Router, Scene, Tabs } from 'react-native-router-flux'
-import { RouteState } from '../store/routes'
+import { Router, Scene, Tabs, Actions } from 'react-native-router-flux'
+import { RouteState } from '../../store/routes'
 
 // type
-import { State } from '../types'
+import { State } from '../../types'
 
 // コンポーネント
 import Detail from './Detail'
-import TagSelect from './TagSelect'
+import TagEdit from '../templates/TagEdit'
 
 // ドロワーボタン
-import BackButton from '../containers/fragments/BackButton'
-import EditButton from '../containers/fragments/EditButton'
-import SaveButton from '../containers/fragments/SaveButton'
+import BackButton from '../atoms/BackButton'
+import EditButton from '../atoms/EditButton'
+import SaveButton from '../atoms/SaveButton'
 
-import globalStyles, { secondary, inactive } from '../styles/global'
+import globalStyles, { secondary, inactive } from '../../styles/global'
+
+import { resetEdit } from '../../store/edit'
+import { resetSearch } from '../../store/search'
 
 export default (): JSX.Element => {
+  const dispatch = useDispatch()
   const routes = useSelector((state: State) => state.routes)
 
+  const pressTab = ({ navigation }) => {
+    if (navigation.state.key === 'Edit') dispatch(resetEdit())
+    if (navigation.state.key === 'Timeline') dispatch(resetSearch())
+    Actions[navigation.state.key]()
+  }
   const mapPages = (): JSX.Element => {
     return (
       <Tabs
         key="main"
         swipeEnabled
         animationEnabled
-        // tabBarStyle={{ backgroundColor: '#F8F8F8' }}
         activeTintColor={secondary}
         inactiveTintColor={inactive}
+        tabBarOnPress={(t: any) => pressTab(t)}
       >
         {routes.map((route: RouteState) => (
           <Scene
             key={route.key}
             component={route.component}
-            title={route.key}
+            title={route.title}
             titleStyle={globalStyles.headline}
             initial={route.initial}
             tabBarLabel={route.title}
@@ -63,18 +72,17 @@ export default (): JSX.Element => {
         <Scene key="Detail">
           <Scene
             key="Detail"
-            title="〜レシピ名〜"
             renderLeftButton={BackButton}
             renderRightButton={EditButton}
             component={Detail}
           />
         </Scene>
-        <Scene key="TagSelect">
+        {/* タイムラインからの詳細表示 */}
+        <Scene key="TagEdit">
           <Scene
-            key="TagSelect"
-            title="TagSelect"
+            key="TagEdit"
             renderLeftButton={BackButton}
-            component={TagSelect}
+            component={TagEdit}
           />
         </Scene>
       </Scene>

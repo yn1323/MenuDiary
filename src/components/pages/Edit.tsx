@@ -1,47 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, Image, TouchableOpacity } from 'react-native'
-import {
-  Button,
-  Text,
-  H3,
-  View,
-  Item,
-  Input,
-  Textarea,
-  Icon,
-} from 'native-base'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { StyleSheet, Image } from 'react-native'
+import { Button, Text, View, Item, Input, Textarea, Icon } from 'native-base'
+import { Actions } from 'react-native-router-flux'
 
 // component
+import Hr from '../atoms/Hr'
 import Scroll from '../templates/Scroll'
-import Hr from '../containers/fragments/Hr'
-import RegisterDate from '../containers/fragments/RegisterDate'
-// type
+import RegisterDate from '../molecules/RegisterDate'
+import CommentHeadline from '../molecules/CommentHeadline'
+import PhotoUpload from '../molecules/PhotoUpload'
+// style
+import globalStyle, { gray } from '../../styles/global'
+
 import { State } from '../../types'
 
-// style
-import globalStyle, { gray } from '../styles/global'
-
-import { now } from '../helpers/common'
-const limits = {
-  title: {
-    length: 128,
-  },
-  comment: {
-    length: 1280,
-  },
-}
+import { now } from '../../helpers/common'
+import { setEdit } from '../../store/edit'
 
 export default (): JSX.Element => {
-  const [title, setTitle] = useState('')
-  const [tag, setTag] = useState('')
-  const [comment, setComment] = useState('')
-  const [image, setImage] = useState('')
+  const dispatch = useDispatch()
+  const store = useSelector((state: State) => state.edit)
+  const [title, setTitle] = useState(store.title)
+  const [tag, setTag] = useState(store.tag)
+  const [comment, setComment] = useState(store.comment)
+  const [uri, setUri] = useState(store.uri)
   const regDate = now()
 
-  const upload = () => {
-    alert('upload Photo')
+  // 2回目以降useStateで正しくセットされないため
+  if (title !== store.title) {
+    setTitle(store.title)
+    setTag(store.tag)
+    setComment(store.comment)
+    setUri(store.uri)
   }
+
+  // 編集時
+  useEffect(() => {
+    dispatch(
+      setEdit({
+        id: '3',
+        title,
+        uri,
+        comment,
+        tag,
+        regDate,
+      }),
+    )
+  }, [title, tag, comment, uri])
 
   return (
     <Scroll extraMargin={50}>
@@ -53,7 +59,7 @@ export default (): JSX.Element => {
             placeholder="料理名"
             value={title}
             onChangeText={(t) => setTitle(t)}
-            maxLength={limits.title.length}
+            maxLength={128}
           />
         </Item>
       </View>
@@ -61,7 +67,7 @@ export default (): JSX.Element => {
       {/* タグ & 作成日 */}
       <View style={styles.tagDate}>
         {/* タグ */}
-        <Button small>
+        <Button small onPress={Actions.TagEdit}>
           <Icon name="pricetag" />
           <Text>{tag || 'タグを選択'}</Text>
         </Button>
@@ -72,29 +78,20 @@ export default (): JSX.Element => {
 
       {/* 画像 */}
       <View>
-        {image ? (
+        {uri ? (
           <Image
-            source={require('../../assets/img/meat.jpg')}
+            source={require('../../../assets/img/meat.jpg')}
             style={styles.img}
             resizeMode="contain"
           />
         ) : (
-          <TouchableOpacity
-            style={[styles.img, globalStyle.center_vh, styles.noImg]}
-            onPress={() => upload()}
-            activeOpacity={0.9}
-          >
-            <Icon name="camera" style={styles.noImgIcon}></Icon>
-            <Text style={styles.noImgText}>Upload Photo</Text>
-          </TouchableOpacity>
+          <PhotoUpload />
         )}
       </View>
 
+      <Hr marginBottom={10} marginTop={10} />
       {/* コメント */}
-      <View style={[globalStyle.center_vh, { height: 50 }]}>
-        <Icon name="thumbs-up" style={styles.titieIcon} />
-        <H3 style={styles.title}> ポイント</H3>
-      </View>
+      <CommentHeadline />
 
       <View style={globalStyle.center_vh}>
         <Item style={{ width: '90%' }}>
@@ -103,7 +100,7 @@ export default (): JSX.Element => {
             rowSpan={8}
             value={comment}
             onChangeText={(t) => setComment(t)}
-            maxLength={limits.title.length}
+            maxLength={1280}
           />
         </Item>
       </View>
@@ -132,16 +129,5 @@ const styles = StyleSheet.create({
   img: {
     height: 280,
     width: '100%',
-  },
-  noImg: {
-    backgroundColor: '#aaa',
-    flexDirection: 'column',
-  },
-  noImgText: {
-    color: '#ddd',
-  },
-  noImgIcon: {
-    color: '#ddd',
-    fontSize: 100,
   },
 })

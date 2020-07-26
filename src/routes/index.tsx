@@ -1,12 +1,12 @@
-import Config from '../pages/Config'
-import Detail from '../pages/Detail'
-import Login from '../pages/Login'
-import PostEdit from '../pages/PostEdit'
-import SearchCondition from '../pages/SearchCondition'
-import SearchList from '../pages/SearchResult'
-import TagEdit from '../pages/TagEdit'
-import Timeline from '../pages/Timeline'
-import Tutorial from '../pages/Tutorial'
+import Config from '../components/pages/Config'
+import Detail from '../components/pages/Detail'
+import Login from '../components/pages/Login'
+import PostEdit from '../components/pages/PostEdit'
+import SearchCondition from '../components/pages/SearchCondition'
+import SearchList from '../components/pages/SearchResult'
+import TagEdit from '../components/pages/TagEdit'
+import Timeline from '../components/pages/Timeline'
+import Tutorial from '../components/pages/Tutorial'
 
 export const pages = [
   {
