@@ -1,21 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Config from '../pages/Config'
-import Detail from '../pages/Detail'
-import Login from '../pages/Login'
-import PostEdit from '../pages/PostEdit'
-import SearchCondition from '../pages/SearchCondition'
-import SearchList from '../pages/SearchList'
-import TagEdit from '../pages/TagEdit'
-import Timeline from '../pages/Timeline'
-import Tutorial from '../pages/Tutorial'
+import Config from '../components/pages/Config'
+import Edit from '../components/pages/Edit'
+import TagSelect from '../components/pages/TagSelect'
+import Timeline from '../components/pages/Timeline'
 
 export type RouteState = {
   title: string // メニューに表示
   component: any
   key: string
   initial: boolean // 初回表示
-  selected: boolean // ドロワーで選択状態か(使用していない)
-  showInDrawer: boolean // ドロワー表示
+  icon: string
 }
 
 type Action = {
@@ -28,74 +22,30 @@ const initialState: RouteState[] = [
     title: 'タイムライン',
     component: Timeline,
     key: 'Timeline',
-    initial: false,
-    selected: true,
-    showInDrawer: true,
-  },
-  {
-    title: '検索条件',
-    component: SearchCondition,
-    key: 'SearchCondition',
-    initial: false,
-    selected: false,
-    showInDrawer: true,
-  },
-  {
-    title: 'タグ編集',
-    component: TagEdit,
-    key: 'TagEdit',
-    initial: false,
-    selected: false,
-    showInDrawer: true,
-  },
-  {
-    title: '設定',
-    component: Config,
-    key: 'Config',
-    initial: false,
-    selected: false,
-    showInDrawer: true,
-  },
-  {
-    title: '詳細表示',
-    component: Detail,
-    key: 'Detail',
-    initial: false,
-    selected: false,
-    showInDrawer: false,
-  },
-  {
-    title: 'ログイン',
-    component: Login,
-    key: 'Login',
-    initial: false,
-    selected: false,
-    showInDrawer: false,
+    initial: true,
+    icon: 'home',
   },
   {
     title: '編集',
-    component: PostEdit,
-    key: 'PostEdit',
+    component: Edit,
+    key: 'Edit',
     initial: false,
-    selected: false,
-    showInDrawer: false,
+    icon: 'create',
   },
   {
-    title: '検索結果',
-    component: SearchList,
-    key: 'SearchList',
+    title: '検索',
+    component: TagSelect,
+    key: 'TagSelect',
     initial: false,
-    selected: false,
-    showInDrawer: false,
+    icon: 'search',
   },
-  {
-    title: 'チュートリアル',
-    component: Tutorial,
-    key: 'Tutorial',
-    initial: false,
-    selected: false,
-    showInDrawer: true,
-  },
+  // {
+  //   title: '設定',
+  //   component: Config,
+  //   key: 'Config',
+  //   initial: false,
+  //   icon: 'person',
+  // },
 ]
 
 const State = createSlice({
