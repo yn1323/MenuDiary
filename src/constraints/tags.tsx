@@ -15,6 +15,7 @@ export type Tag =
   | '鍋もの'
   | '麺料理'
   | 'その他'
+  | ''
 
 interface Tags {
   tag: Tag

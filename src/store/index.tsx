@@ -5,12 +5,14 @@ import routes from './routes'
 import post from './post'
 import user from './user'
 import edit from './edit'
+import search from './search'
 
 const reducer = combineReducers({
   routes,
   post,
   user,
   edit,
+  search,
 })
 
 // getDefaultMiddleware: serializeエラーがスマホで発生するため
@@ -26,3 +28,4 @@ export * from './routes'
 export * from './post'
 export * from './user'
 export * from './edit'
+export * from './search'

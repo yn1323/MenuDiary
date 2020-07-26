@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { StyleSheet, Image } from 'react-native'
 import { Button, Text, View, Item, Input, Textarea, Icon } from 'native-base'
+import { Actions } from 'react-native-router-flux'
 
 // component
 import Hr from '../atoms/Hr'
@@ -66,7 +67,7 @@ export default (): JSX.Element => {
       {/* タグ & 作成日 */}
       <View style={styles.tagDate}>
         {/* タグ */}
-        <Button small>
+        <Button small onPress={Actions.TagEdit}>
           <Icon name="pricetag" />
           <Text>{tag || 'タグを選択'}</Text>
         </Button>

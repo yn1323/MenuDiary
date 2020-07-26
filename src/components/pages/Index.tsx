@@ -9,6 +9,7 @@ import { State } from '../../types'
 
 // コンポーネント
 import Detail from './Detail'
+import TagEdit from '../templates/TagEdit'
 
 // ドロワーボタン
 import BackButton from '../atoms/BackButton'
@@ -17,14 +18,16 @@ import SaveButton from '../atoms/SaveButton'
 
 import globalStyles, { secondary, inactive } from '../../styles/global'
 
-import { reset } from '../../store/edit'
+import { resetEdit } from '../../store/edit'
+import { resetSearch } from '../../store/search'
 
 export default (): JSX.Element => {
   const dispatch = useDispatch()
   const routes = useSelector((state: State) => state.routes)
 
   const pressTab = ({ navigation }) => {
-    if (navigation.state.key === 'Edit') dispatch(reset())
+    if (navigation.state.key === 'Edit') dispatch(resetEdit())
+    if (navigation.state.key === 'Timeline') dispatch(resetSearch())
     Actions[navigation.state.key]()
   }
   const mapPages = (): JSX.Element => {
@@ -72,6 +75,14 @@ export default (): JSX.Element => {
             renderLeftButton={BackButton}
             renderRightButton={EditButton}
             component={Detail}
+          />
+        </Scene>
+        {/* タイムラインからの詳細表示 */}
+        <Scene key="TagEdit">
+          <Scene
+            key="TagEdit"
+            renderLeftButton={BackButton}
+            component={TagEdit}
           />
         </Scene>
       </Scene>

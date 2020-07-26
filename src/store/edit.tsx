@@ -31,11 +31,11 @@ const State = createSlice({
   name: 'edit',
   initialState,
   reducers: {
-    reset: () => ({ ...empty }),
+    resetEdit: () => ({ ...empty }),
     setEdit: (_: EditState, { payload }) => ({ ...payload }),
   },
 })
 
 export default State.reducer
 
-export const { reset, setEdit } = State.actions
+export const { resetEdit, setEdit } = State.actions
