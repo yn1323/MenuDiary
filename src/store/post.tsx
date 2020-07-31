@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { orderPost } from '../helpers/common'
 import { Tag } from '../constraints'
+import { getPost, insertPost, deletePost } from '../server/storage'
 
 export type PostState = {
   id: string
@@ -8,6 +10,22 @@ export type PostState = {
   regDate: string
   uri: string
   comment: string
+}
+
+interface SetPostAction {
+  type: string
+  payload: PostState[]
+}
+
+type FixPostAction = {
+  type: string
+  payload: PostState
+}
+type DelPostAction = {
+  type: string
+  payload: {
+    id: string
+  }
 }
 
 const initialState: PostState[] = [
@@ -57,17 +75,41 @@ const State = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    // setPost: (state: PostState) => {
-    //   console.log(state)
-    //   // alert('aa')
-    //   return { ...state }
-    // },
-    // delPost: (): PostState => ({
-    //   ...initialState,
-    // }),
+    setPost: (_: PostState[], { payload }: SetPostAction) =>
+      orderPost([...payload]),
+
+    fixPost: (state: PostState[], { payload }: FixPostAction) =>
+      orderPost([...state.filter((e) => e.id !== payload.id), payload]),
+    delPost: (state: PostState[], { payload }: DelPostAction) =>
+      orderPost([...state.filter((e) => e.id !== payload.id)]),
   },
 })
 
 export default State.reducer
 
-// export const { setPost, delPost } = State.actions
+export const { setPost, fixPost, delPost } = State.actions
+
+export const fetchPost = () => async (dispatch: any) => {
+  try {
+    const res = await getPost()
+    // 非同期処理の中で定義した Action Creator を呼び出すことができる
+    dispatch(setPost(res))
+  } catch (err) {
+    console.log('No Data Found??')
+    console.error(err)
+  }
+}
+
+export const addPost = (post: PostState) => async (dispatch: any) => {
+  try {
+    await insertPost(post)
+    dispatch(fixPost(post))
+  } catch (err) {}
+}
+
+export const removePost = (id: string) => async (dispatch: any) => {
+  try {
+    await deletePost(id)
+    dispatch(delPost({ id }))
+  } catch (err) {}
+}

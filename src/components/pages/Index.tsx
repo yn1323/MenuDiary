@@ -10,6 +10,7 @@ import { State } from '../../types'
 // コンポーネント
 import Detail from './Detail'
 import TagEdit from '../templates/TagEdit'
+// import Test from './Test'
 
 // ドロワーボタン
 import BackButton from '../atoms/BackButton'
@@ -85,6 +86,7 @@ export default (): JSX.Element => {
             component={TagEdit}
           />
         </Scene>
+        {/* <Scene key="Test" initial component={Test} /> */}
       </Scene>
     </Router>
   )

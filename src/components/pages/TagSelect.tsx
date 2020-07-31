@@ -35,7 +35,6 @@ export default ({ isTagSet }: Props): JSX.Element => {
   const store = useSelector((state: State) => state)
 
   const commit = (tag: string) => {
-    alert(`clicked: ${tag}`)
     // store追加
     if (isTagSet) {
       dispatch(setEdit({ ...store.state, tag: tag }))
