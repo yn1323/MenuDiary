@@ -45,30 +45,6 @@ const initialState: PostState[] = [
     comment: 'bbb',
     regDate: '2020-07-12',
   },
-  {
-    id: '3',
-    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
-    title: 'メニュdsaddddddddddddー名3',
-    tag: 'その他',
-    comment: 'ccc',
-    regDate: '2020-07-13',
-  },
-  {
-    id: '4',
-    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
-    title: 'メニュー名4',
-    tag: '乳製品のおかず',
-    comment: 'dddd',
-    regDate: '2020-07-14',
-  },
-  {
-    id: '5',
-    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
-    title: 'メニュー名5',
-    tag: '定番',
-    comment: 'eeeeee',
-    regDate: '2020-07-15',
-  },
 ]
 
 const State = createSlice({
