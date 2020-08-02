@@ -13,6 +13,8 @@ import { State } from '../../types'
 // コンポーネント
 import Detail from './Detail'
 import TagEdit from '../templates/TagEdit'
+import PostEdit from '../templates/PostEdit'
+import PostAdd from '../templates/PostAdd'
 // import Test from './Test'
 
 // ドロワーボタン
@@ -57,7 +59,12 @@ export default (): JSX.Element => {
   }
 
   const pressTab = ({ navigation }) => {
-    if (navigation.state.key === 'Edit') dispatch(resetEdit())
+    if (navigation.state.key === 'Edit') {
+      dispatch(resetEdit())
+      Actions.PostAdd()
+
+      return
+    }
     if (navigation.state.key === 'Timeline') dispatch(resetSearch())
     Actions[navigation.state.key]()
   }
@@ -114,12 +121,34 @@ export default (): JSX.Element => {
             component={Detail}
           />
         </Scene>
-        {/* タイムラインからの詳細表示 */}
+        {/* タグの編集画面 */}
         <Scene key="TagEdit">
           <Scene
             key="TagEdit"
             renderLeftButton={BackButton}
             component={TagEdit}
+          />
+        </Scene>
+        {/* 新規記事編集画面 */}
+        <Scene key="PosｔEdit">
+          <Scene
+            key="PostEdit"
+            renderLeftButton={BackButton}
+            component={PostEdit}
+            renderRightButton={SaveButton(clickCheck)}
+            onEnter={enterEdit}
+            onExit={submitPost}
+          />
+        </Scene>
+        {/* 保存済みの記事編集画面 */}
+        <Scene key="PostAdd">
+          <Scene
+            key="PostAdd"
+            renderLeftButton={BackButton}
+            component={PostAdd}
+            renderRightButton={SaveButton(clickCheck)}
+            onEnter={enterEdit}
+            onExit={submitPost}
           />
         </Scene>
         {/* <Scene key="Test" initial component={Test} /> */}

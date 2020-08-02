@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Tag } from '../constraints'
+import uuid from '../helpers/uuid'
 
 export type EditState = {
   id: string
@@ -18,6 +19,8 @@ export const empty: EditState = {
   comment: '',
   regDate: '',
 }
+
+export const createNewPost = (): EditState => ({ ...empty, id: uuid() })
 
 const initialState: EditState = {
   ...empty,

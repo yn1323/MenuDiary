@@ -26,7 +26,7 @@ const initialState: RouteState[] = [
     icon: 'home',
   },
   {
-    title: '編集',
+    title: '追加',
     component: Edit,
     key: 'Edit',
     initial: false,
