@@ -1,15 +1,18 @@
-import * as React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Icon } from 'native-base'
 import { Router, Scene, Tabs, Actions } from 'react-native-router-flux'
 import { RouteState } from '../../store/routes'
-
-// type
-import { State } from '../../types'
+import { addPost } from '../../store/post'
+import uuid from '../../helpers/uuid'
+import store from '../../store'
 
 // コンポーネント
 import Detail from './Detail'
 import TagEdit from '../templates/TagEdit'
+import PostEdit from '../templates/PostEdit'
+import PostAdd from '../templates/PostAdd'
+// import Test from './Test'
 
 // ドロワーボタン
 import BackButton from '../atoms/BackButton'
@@ -23,13 +26,46 @@ import { resetSearch } from '../../store/search'
 
 export default (): JSX.Element => {
   const dispatch = useDispatch()
-  const routes = useSelector((state: State) => state.routes)
+  const routes = store.getState().routes
+
+  // 編集画面の確定
+  // チェックボタン押下フラグ
+  let submit = false
+  const clickCheck = () => {
+    submit = true
+    Actions.Timeline()
+  }
+  const enterEdit = () => {
+    submit = false
+  }
+  const submitPost = () => {
+    if (submit) {
+      const { id, title, tag, regDate, uri, comment } = store.getState().edit
+      dispatch(
+        addPost({
+          id,
+          title,
+          tag,
+          regDate,
+          uri,
+          comment,
+        }),
+      )
+    }
+    dispatch(resetEdit())
+  }
 
   const pressTab = ({ navigation }) => {
-    if (navigation.state.key === 'Edit') dispatch(resetEdit())
+    if (navigation.state.key === 'Edit') {
+      dispatch(resetEdit())
+      Actions.PostAdd()
+
+      return
+    }
     if (navigation.state.key === 'Timeline') dispatch(resetSearch())
     Actions[navigation.state.key]()
   }
+
   const mapPages = (): JSX.Element => {
     return (
       <Tabs
@@ -39,6 +75,7 @@ export default (): JSX.Element => {
         activeTintColor={secondary}
         inactiveTintColor={inactive}
         tabBarOnPress={(t: any) => pressTab(t)}
+        lazy
       >
         {routes.map((route: RouteState) => (
           <Scene
@@ -56,7 +93,6 @@ export default (): JSX.Element => {
                 style={{ color: focused ? secondary : inactive }}
               />
             )}
-            renderRightButton={route.key === 'Edit' ? SaveButton : <></>}
           />
         ))}
       </Tabs>
@@ -77,7 +113,7 @@ export default (): JSX.Element => {
             component={Detail}
           />
         </Scene>
-        {/* タイムラインからの詳細表示 */}
+        {/* タグの編集画面 */}
         <Scene key="TagEdit">
           <Scene
             key="TagEdit"
@@ -85,6 +121,29 @@ export default (): JSX.Element => {
             component={TagEdit}
           />
         </Scene>
+        {/* 新規記事編集画面 */}
+        <Scene key="PosｔEdit">
+          <Scene
+            key="PostEdit"
+            renderLeftButton={BackButton}
+            component={PostEdit}
+            renderRightButton={SaveButton(clickCheck)}
+            onEnter={enterEdit}
+            onExit={submitPost}
+          />
+        </Scene>
+        {/* 保存済みの記事編集画面 */}
+        <Scene key="PostAdd">
+          <Scene
+            key="PostAdd"
+            renderLeftButton={BackButton}
+            component={PostAdd}
+            renderRightButton={SaveButton(clickCheck)}
+            onEnter={enterEdit}
+            onExit={submitPost}
+          />
+        </Scene>
+        {/* <Scene key="Test" initial component={Test} /> */}
       </Scene>
     </Router>
   )

@@ -1,21 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Tag } from '../constraints'
+import uuid from '../helpers/uuid'
 
 export type EditState = {
   id: string
   title: string
-  tag: string
+  tag: Tag
   regDate: string
   uri: string
   comment: string
-}
-
-const initialState: EditState = {
-  id: '5',
-  uri: 'https://facebook.github.io/react-native/img/header_logo.png',
-  title: 'メニュー名EDIT',
-  tag: '肉のおかず',
-  comment: 'dasjdsahdksahfahla',
-  regDate: '2020-07-15',
 }
 
 export const empty: EditState = {
@@ -25,6 +18,12 @@ export const empty: EditState = {
   tag: '',
   comment: '',
   regDate: '',
+}
+
+export const createNewPost = (): EditState => ({ ...empty, id: uuid() })
+
+const initialState: EditState = {
+  ...empty,
 }
 
 const State = createSlice({

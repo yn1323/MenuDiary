@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { StyleSheet, Image } from 'react-native'
 import { Button, Text, View, Item, Input, Textarea, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
@@ -13,33 +13,29 @@ import PhotoUpload from '../molecules/PhotoUpload'
 // style
 import globalStyle, { gray } from '../../styles/global'
 
-import { State } from '../../types'
+import { EditState } from '../../store/edit'
 
 import { now } from '../../helpers/common'
 import { setEdit } from '../../store/edit'
 
-export default (): JSX.Element => {
-  const dispatch = useDispatch()
-  const store = useSelector((state: State) => state.edit)
-  const [title, setTitle] = useState(store.title)
-  const [tag, setTag] = useState(store.tag)
-  const [comment, setComment] = useState(store.comment)
-  const [uri, setUri] = useState(store.uri)
-  const regDate = now()
+interface Props {
+  post: EditState
+}
 
-  // 2回目以降useStateで正しくセットされないため
-  if (title !== store.title) {
-    setTitle(store.title)
-    setTag(store.tag)
-    setComment(store.comment)
-    setUri(store.uri)
-  }
+export default ({ post }: Props): JSX.Element => {
+  const dispatch = useDispatch()
+  const id = post.id
+  const [title, setTitle] = useState(post.title)
+  const [tag, setTag] = useState(post.tag)
+  const [comment, setComment] = useState(post.comment)
+  const [uri, setUri] = useState(post.uri)
+  const regDate = now()
 
   // 編集時
   useEffect(() => {
     dispatch(
       setEdit({
-        id: '3',
+        id,
         title,
         uri,
         comment,

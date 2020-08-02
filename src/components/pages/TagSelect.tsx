@@ -35,12 +35,11 @@ export default ({ isTagSet }: Props): JSX.Element => {
   const store = useSelector((state: State) => state)
 
   const commit = (tag: string) => {
-    alert(`clicked: ${tag}`)
     // store追加
     if (isTagSet) {
-      dispatch(setEdit({ ...store.state, tag: tag }))
+      dispatch(setEdit({ ...store.edit, tag }))
     } else {
-      dispatch(setSearch({ ...store.search, tag: tag }))
+      dispatch(setSearch({ ...store.search, tag }))
     }
     // 遷移先
     Actions[isTagSet ? 'Edit' : 'Timeline']()

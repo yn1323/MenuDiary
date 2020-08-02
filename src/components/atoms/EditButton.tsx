@@ -10,7 +10,7 @@ export default (): JSX.Element => (
   <View style={styles.margin}>
     <Icon
       name="create"
-      onPress={Actions.Edit}
+      onPress={Actions.PosｔEdit}
       style={[globalStyles.headline, styles.text]}
     ></Icon>
   </View>

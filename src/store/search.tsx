@@ -9,7 +9,7 @@ const initialState: SearchState = {
   tag: '',
 }
 
-export const empty: SearchState = {
+const empty: SearchState = {
   tag: '',
 }
 
