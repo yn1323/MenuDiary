@@ -1,14 +1,11 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Icon } from 'native-base'
 import { Router, Scene, Tabs, Actions } from 'react-native-router-flux'
 import { RouteState } from '../../store/routes'
 import { addPost } from '../../store/post'
 import uuid from '../../helpers/uuid'
 import store from '../../store'
-
-// type
-import { State } from '../../types'
 
 // コンポーネント
 import Detail from './Detail'
@@ -29,7 +26,7 @@ import { resetSearch } from '../../store/search'
 
 export default (): JSX.Element => {
   const dispatch = useDispatch()
-  const routes = useSelector((state: State) => state.routes)
+  const routes = store.getState().routes
 
   // 編集画面の確定
   // チェックボタン押下フラグ
@@ -43,10 +40,10 @@ export default (): JSX.Element => {
   }
   const submitPost = () => {
     if (submit) {
-      const { title, tag, regDate, uri, comment } = store.getState().edit
+      const { id, title, tag, regDate, uri, comment } = store.getState().edit
       dispatch(
         addPost({
-          id: uuid(),
+          id,
           title,
           tag,
           regDate,
@@ -96,11 +93,6 @@ export default (): JSX.Element => {
                 style={{ color: focused ? secondary : inactive }}
               />
             )}
-            renderRightButton={
-              route.key === 'Edit' ? () => SaveButton(clickCheck) : <></>
-            }
-            onEnter={route.key === 'Edit' ? enterEdit : ''}
-            onExit={route.key === 'Edit' ? submitPost : ''}
           />
         ))}
       </Tabs>

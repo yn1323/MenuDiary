@@ -53,7 +53,6 @@ const State = createSlice({
   reducers: {
     setPost: (_: PostState[], { payload }: SetPostAction) =>
       orderPost([...payload]),
-
     fixPost: (state: PostState[], { payload }: FixPostAction) =>
       orderPost([...state.filter((e) => e.id !== payload.id), payload]),
     delPost: (state: PostState[], { payload }: DelPostAction) =>
