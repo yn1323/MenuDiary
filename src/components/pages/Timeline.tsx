@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { View } from 'react-native'
 
 // component
 import Scroll from '../templates/Scroll'
@@ -15,7 +16,7 @@ export default (): JSX.Element => {
   return (
     <Scroll>
       {
-        <>
+        <View>
           {posts.map((d: PostState, index: number) => (
             <Card
               key={index}
@@ -25,7 +26,7 @@ export default (): JSX.Element => {
               allInfo={d}
             />
           ))}
-        </>
+        </View>
       }
     </Scroll>
   )

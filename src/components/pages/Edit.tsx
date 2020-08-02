@@ -21,25 +21,19 @@ import { setEdit } from '../../store/edit'
 export default (): JSX.Element => {
   const dispatch = useDispatch()
   const store = useSelector((state: State) => state.edit)
-  const [title, setTitle] = useState(store.title)
-  const [tag, setTag] = useState(store.tag)
-  const [comment, setComment] = useState(store.comment)
-  const [uri, setUri] = useState(store.uri)
-  const regDate = now()
 
-  // 2回目以降useStateで正しくセットされないため
-  if (title !== store.title) {
-    setTitle(store.title)
-    setTag(store.tag)
-    setComment(store.comment)
-    setUri(store.uri)
-  }
+  const [title, setTitle] = useState(store.title || '')
+  const [tag, setTag] = useState(store.tag || '')
+  const [comment, setComment] = useState(store.comment || '')
+  const [uri, setUri] = useState(store.uri || '')
+  const regDate = now()
 
   // 編集時
   useEffect(() => {
     dispatch(
       setEdit({
-        id: '3',
+        // IDはデータ追加時に割り振る
+        id: '',
         title,
         uri,
         comment,
@@ -57,7 +51,7 @@ export default (): JSX.Element => {
           <Icon name="restaurant" style={styles.titieIcon} />
           <Input
             placeholder="料理名"
-            value={title}
+            value={store.title}
             onChangeText={(t) => setTitle(t)}
             maxLength={128}
           />
@@ -69,7 +63,7 @@ export default (): JSX.Element => {
         {/* タグ */}
         <Button small onPress={Actions.TagEdit}>
           <Icon name="pricetag" />
-          <Text>{tag || 'タグを選択'}</Text>
+          <Text>{store.tag || 'タグを選択'}</Text>
         </Button>
         <View style={globalStyle.center_v}>
           <RegisterDate regDate={regDate} />
@@ -98,7 +92,7 @@ export default (): JSX.Element => {
           <Textarea
             placeholder="タップで入力"
             rowSpan={8}
-            value={comment}
+            value={store.comment}
             onChangeText={(t) => setComment(t)}
             maxLength={1280}
           />
