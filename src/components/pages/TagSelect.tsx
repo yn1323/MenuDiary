@@ -39,7 +39,7 @@ export default ({ isTagSet }: Props): JSX.Element => {
     if (isTagSet) {
       dispatch(setEdit({ ...store.edit, tag }))
     } else {
-      dispatch(setSearch({ ...store.search, tag }))
+      dispatch(setSearch({ tag }))
     }
     // 遷移先
     Actions[isTagSet ? 'Edit' : 'Timeline']()

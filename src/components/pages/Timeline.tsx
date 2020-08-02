@@ -12,12 +12,17 @@ import { PostState } from '../../store/post'
 
 export default (): JSX.Element => {
   const posts = useSelector((state: State) => state.post)
+  const search = useSelector((state: State) => state.search.tag)
+
+  const filteredPosts = search
+    ? posts.filter((post: PostState) => post.tag === search)
+    : [...posts]
 
   return (
     <Scroll>
       {
         <View>
-          {posts.map((d: PostState, index: number) => (
+          {filteredPosts.map((d: PostState, index: number) => (
             <Card
               key={index}
               uri={d.uri}

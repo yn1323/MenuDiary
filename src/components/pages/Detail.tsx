@@ -2,7 +2,9 @@ import React from 'react'
 import { StyleSheet, Image } from 'react-native'
 import { Text, Button, Icon, View } from 'native-base'
 import { EditState } from '../../store/edit'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
+import { setSearch } from '../../store/search'
 
 // component
 import Scroll from '../templates/Scroll'
@@ -17,9 +19,14 @@ import { State } from '../../types'
 import globalStyle, { secondary } from '../../styles/global'
 
 export default (): JSX.Element => {
+  const dispatch = useDispatch()
   const { tag, uri, comment, regDate } = useSelector(
     (state: State): EditState => state.edit,
   )
+  const filterPost = () => {
+    dispatch(setSearch({ tag }))
+    Actions.Timeline()
+  }
 
   return (
     <Scroll disableScroll>
@@ -33,7 +40,7 @@ export default (): JSX.Element => {
       {/* タグ & 作成日 */}
       <View style={styles.tagDate}>
         {/* タグ */}
-        <Button small>
+        <Button small onPress={filterPost}>
           <Icon name="pricetag" />
           <Text>{tag}</Text>
         </Button>
