@@ -76,6 +76,12 @@ export const fetchPost = () => async (dispatch: any) => {
 }
 
 export const addPost = (post: PostState) => async (dispatch: any) => {
+  if (!post.title) {
+    post.title = '新しい料理'
+  }
+  if (!post.tag) {
+    post.tag = 'その他'
+  }
   try {
     await insertPost(post)
     dispatch(fixPost(post))
