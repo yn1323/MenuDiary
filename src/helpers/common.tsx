@@ -20,7 +20,6 @@ export const orderPost = (arr: PostState[]): PostState[] => {
       return 1
     }
   })
-  console.log(arr)
 
   return arr
 }
