@@ -1,10 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from 'native-base'
 import { Router, Scene, Tabs, Actions } from 'react-native-router-flux'
 import { RouteState } from '../../store/routes'
 import { addPost } from '../../store/post'
-import uuid from '../../helpers/uuid'
 import store from '../../store'
 
 // コンポーネント
@@ -15,7 +14,8 @@ import PostAdd from '../templates/PostAdd'
 // import Test from './Test'
 
 // ドロワーボタン
-import BackButton from '../atoms/BackButton'
+import BackButton from '../molecules/BackButton'
+import GoTimelineButton from '../molecules/GoTimelineButton'
 import EditButton from '../atoms/EditButton'
 import SaveButton from '../atoms/SaveButton'
 
@@ -26,6 +26,7 @@ import { resetSearch } from '../../store/search'
 
 export default (): JSX.Element => {
   const dispatch = useDispatch()
+  const search = useSelector((state) => state.search.tag)
   const routes = store.getState().routes
 
   // 編集画面の確定
@@ -54,6 +55,10 @@ export default (): JSX.Element => {
     }
     dispatch(resetEdit())
   }
+  // タグ検索からタイムラインに戻る時に使用
+  const refreshSearch = () => {
+    dispatch(resetSearch())
+  }
 
   const pressTab = ({ navigation }) => {
     if (navigation.state.key === 'Edit') {
@@ -81,7 +86,9 @@ export default (): JSX.Element => {
           <Scene
             key={route.key}
             component={route.component}
-            title={route.title}
+            title={
+              route.key !== 'Timeline' ? route.title : search || route.title
+            }
             titleStyle={globalStyles.headline}
             initial={route.initial}
             tabBarLabel={route.title}
@@ -93,6 +100,14 @@ export default (): JSX.Element => {
                 style={{ color: focused ? secondary : inactive }}
               />
             )}
+            // タグ検索時の戻るボタン
+            renderLeftButton={
+              route.key === 'Timeline' && search ? (
+                GoTimelineButton(refreshSearch)
+              ) : (
+                <></>
+              )
+            }
           />
         ))}
       </Tabs>
