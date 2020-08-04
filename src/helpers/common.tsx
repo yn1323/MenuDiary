@@ -14,12 +14,13 @@ export const now = (): string => moment(new Date()).format('YYYY-MM-DD')
 // postの配列を日付順順に並べ替える
 export const orderPost = (arr: PostState[]): PostState[] => {
   arr.sort(function (a, b) {
-    if (a.regDate < b.regDate) {
+    if (a.regDate > b.regDate) {
       return -1
     } else {
       return 1
     }
   })
+  console.log(arr)
 
   return arr
 }
