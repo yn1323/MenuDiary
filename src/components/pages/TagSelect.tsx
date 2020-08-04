@@ -24,7 +24,7 @@ import { secondary } from '../../styles/global'
 
 import { setEdit } from '../../store/edit'
 import { setSearch } from '../../store/search'
-import { State } from '../../types'
+// import { State } from '../../types'
 
 type Props = {
   isTagSet: boolean
@@ -32,17 +32,15 @@ type Props = {
 
 export default ({ isTagSet }: Props): JSX.Element => {
   const dispatch = useDispatch()
-  const store = useSelector((state: State) => state)
-
   const commit = (tag: string) => {
     // store追加
     if (isTagSet) {
-      dispatch(setEdit({ ...store.edit, tag }))
+      dispatch(setEdit({ tag }))
     } else {
       dispatch(setSearch({ tag }))
     }
     // 遷移先
-    Actions[isTagSet ? 'Edit' : 'Timeline']()
+    Actions[isTagSet ? 'pop' : 'Timeline']()
   }
 
   return (

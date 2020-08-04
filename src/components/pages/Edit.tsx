@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { StyleSheet, Image } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Button, Text, View, Item, Input, Textarea, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
@@ -20,13 +20,15 @@ import { setEdit } from '../../store/edit'
 
 interface Props {
   post: EditState
+  tag: string
 }
 
-export default ({ post }: Props): JSX.Element => {
+// タグだけReduxで取得するため
+export default ({ post, tag }: Props): JSX.Element => {
   const dispatch = useDispatch()
   const id = post.id
   const [title, setTitle] = useState(post.title)
-  const [tag, setTag] = useState(post.tag)
+  // const [tag, setTag] = useState(post.tag)
   const [comment, setComment] = useState(post.comment)
   const [uri, setUri] = useState(post.uri)
   const regDate = now()
@@ -74,15 +76,7 @@ export default ({ post }: Props): JSX.Element => {
 
       {/* 画像 */}
       <View>
-        {uri ? (
-          <Image
-            source={require('../../../assets/img/meat.jpg')}
-            style={styles.img}
-            resizeMode="contain"
-          />
-        ) : (
-          <PhotoUpload />
-        )}
+        <PhotoUpload uri={uri} setUri={setUri} />
       </View>
 
       <Hr marginBottom={10} marginTop={10} />
