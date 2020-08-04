@@ -33,16 +33,6 @@ export default ({ post }: Props): JSX.Element => {
 
   // 編集時
   useEffect(() => {
-    console.log('uri changed')
-    console.log('Edit.tsx')
-    console.log({
-      id,
-      title,
-      uri,
-      comment,
-      tag,
-      regDate,
-    })
     dispatch(
       setEdit({
         id,
