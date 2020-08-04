@@ -31,7 +31,7 @@ const State = createSlice({
   initialState,
   reducers: {
     resetEdit: () => ({ ...empty }),
-    setEdit: (_: EditState, { payload }) => ({ ...payload }),
+    setEdit: (state: EditState, { payload }) => ({ ...state, ...payload }),
   },
 })
 

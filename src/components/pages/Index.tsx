@@ -54,8 +54,8 @@ export default (): JSX.Element => {
           comment,
         }),
       )
+      dispatch(resetEdit())
     }
-    dispatch(resetEdit())
   }
   // タグ検索からタイムラインに戻る時に使用
   const refreshSearch = () => {

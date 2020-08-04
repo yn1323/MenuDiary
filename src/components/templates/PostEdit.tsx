@@ -1,11 +1,14 @@
 import React from 'react'
-import store from '../../store'
+import { useSelector } from 'react-redux'
+// import store from '../../store'
 
 // component
 import Edit from '../pages/Edit'
 
-export default (): JSX.Element => {
-  const post = store.getState().edit
+import { State } from '../../type'
 
-  return <Edit post={post} />
+export default (): JSX.Element => {
+  const post = useSelector((state: State) => state.edit)
+
+  return <Edit post={post} tag={post.tag} />
 }
