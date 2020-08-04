@@ -24,9 +24,11 @@ import globalStyles, { secondary, inactive } from '../../styles/global'
 import { resetEdit } from '../../store/edit'
 import { resetSearch } from '../../store/search'
 
+import { State } from '../../types'
+
 export default (): JSX.Element => {
   const dispatch = useDispatch()
-  const search = useSelector((state) => state.search.tag)
+  const search = useSelector((state: State) => state.search.tag)
   const routes = store.getState().routes
 
   // 編集画面の確定
