@@ -32,7 +32,7 @@ export default (): JSX.Element => {
     <Scroll disableScroll>
       {/* 画像 */}
       <Image
-        source={require('../../../assets/img/meat.jpg')}
+        source={uri ? { uri } : require('../../../assets/img/meat.jpg')}
         style={{ height: 280, width: '100%' }}
         resizeMode="contain"
       />

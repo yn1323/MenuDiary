@@ -1,18 +1,55 @@
-import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
+import React, { useEffect } from 'react'
+import { TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { Icon, Text } from 'native-base'
+
+// Expo
+import * as ImagePicker from 'expo-image-picker'
+import Constants from 'expo-constants'
+import * as Permissions from 'expo-permissions'
 
 import globalStyle from '../../styles/global'
 
-export default (): JSX.Element => {
-  const upload = () => {
-    alert('upload Photo')
+interface Props {
+  uri: string
+  setUri: any
+}
+
+export default ({ uri, setUri }: Props): JSX.Element => {
+  useEffect(() => {
+    getPermissionAsync()
+  }, [])
+
+  const getPermissionAsync = async () => {
+    if (Constants?.platform?.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!')
+      }
+    }
   }
 
-  return (
+  const pickImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      })
+      if (!result.cancelled) {
+        setUri(result.uri)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  return uri ? (
+    <Image source={{ uri }} resizeMode="contain" style={styles.img} />
+  ) : (
     <TouchableOpacity
       style={[styles.img, globalStyle.center_vh, styles.noImg]}
-      onPress={() => upload()}
+      onPress={pickImage}
       activeOpacity={0.9}
     >
       <Icon name="camera" style={styles.noImgIcon}></Icon>
