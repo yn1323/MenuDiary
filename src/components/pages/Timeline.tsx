@@ -23,6 +23,7 @@ export default (): JSX.Element => {
       {filteredPosts.length ? (
         filteredPosts.map((d: PostState, index: number) => (
           <View
+            key={d.id}
             style={
               index === 0
                 ? [styles.cardSpace, styles.cardSpaceTop]
@@ -32,7 +33,7 @@ export default (): JSX.Element => {
             }
           >
             <Card
-              key={index}
+              key={d.id}
               uri={d.uri}
               title={d.title}
               regDate={d.regDate}
