@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from 'native-base'
 import { Router, Scene, Tabs, Actions } from 'react-native-router-flux'
@@ -23,6 +23,7 @@ import globalStyles, { secondary, inactive } from '../../styles/global'
 
 import { resetEdit } from '../../store/edit'
 import { resetSearch } from '../../store/search'
+import { fetchPost } from '../../store/post'
 
 import { State } from '../../types'
 
@@ -31,6 +32,9 @@ export default (): JSX.Element => {
   const search = useSelector((state: State) => state.search.tag)
   const routes = store.getState().routes
 
+  useEffect(() => {
+    dispatch(fetchPost())
+  }, [])
   // 編集画面の確定
   // チェックボタン押下フラグ
   let submit = false

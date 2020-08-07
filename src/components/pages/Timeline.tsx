@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 // component
 import Scroll from '../templates/Scroll'
@@ -22,15 +22,19 @@ export default (): JSX.Element => {
     <Scroll>
       {
         <View>
-          {filteredPosts.map((d: PostState, index: number) => (
-            <Card
-              key={index}
-              uri={d.uri}
-              title={d.title}
-              regDate={d.regDate}
-              allInfo={d}
-            />
-          ))}
+          {filteredPosts.length ? (
+            filteredPosts.map((d: PostState, index: number) => (
+              <Card
+                key={index}
+                uri={d.uri}
+                title={d.title}
+                regDate={d.regDate}
+                allInfo={d}
+              />
+            ))
+          ) : (
+            <Text>料理がありません。</Text>
+          )}
         </View>
       }
     </Scroll>
