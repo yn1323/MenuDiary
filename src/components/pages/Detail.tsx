@@ -11,7 +11,7 @@ import Scroll from '../templates/Scroll'
 import RegisterDate from '../molecules/RegisterDate'
 import Hr from '../atoms/Hr'
 import CommentHeadline from '../molecules/CommentHeadline'
-
+import Fabs from '../molecules/Fabs'
 // type
 import { State } from '../../types'
 
@@ -29,7 +29,7 @@ export default (): JSX.Element => {
   }
 
   return (
-    <Scroll disableScroll>
+    <Scroll disableScroll fabs>
       {/* 画像 */}
       <Image
         source={uri ? { uri } : require('../../../assets/img/meat.jpg')}
