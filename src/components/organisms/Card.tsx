@@ -44,7 +44,7 @@ export default memo(
               <Image
                 source={{ uri: uri }}
                 resizeMode="contain"
-                style={[styles.image, { backgroundColor: 'lightblue' }]}
+                style={[styles.image, { backgroundColor: '#f0f0f0' }]}
               />
               <View
                 style={[globalStyle.center_v, styles.image, styles.titleArea]}
