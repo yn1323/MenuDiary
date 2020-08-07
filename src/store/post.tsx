@@ -85,6 +85,7 @@ export const addPost = (post: PostState) => async (dispatch: any) => {
   try {
     await insertPost(post)
     dispatch(fixPost(post))
+    console.log(post)
   } catch (err) {}
 }
 

@@ -45,10 +45,10 @@ export default memo(
                 <Image
                   source={{ uri: uri }}
                   resizeMode="contain"
-                  style={[styles.image, { backgroundColor: '#f0f0f0' }]}
+                  style={[styles.image, { backgroundColor: '#f7f7f7' }]}
                 />
               ) : (
-                <View style={[styles.image, { backgroundColor: '#f0f0f0' }]} />
+                <View style={[styles.image, { backgroundColor: '#f7f7f7' }]} />
               )}
 
               <View
