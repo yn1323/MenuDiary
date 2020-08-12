@@ -5,7 +5,7 @@ import { Container, Content, H1, View } from 'native-base'
 // style
 import globalStyle, { backgroundColor, secondary } from '../../styles/global'
 
-const title = 'Menu Diary'
+const title = ''
 const circleSize = 150
 
 export default (): JSX.Element => {
