@@ -41,11 +41,16 @@ export default memo(
           <CardItem style={styles.card}>
             <View style={styles.cardColumns}>
               {/* <Image source={img} resizeMode="contain" style={styles.image} /> */}
-              <Image
-                source={{ uri: uri }}
-                resizeMode="contain"
-                style={[styles.image, { backgroundColor: 'lightblue' }]}
-              />
+              {uri ? (
+                <Image
+                  source={{ uri: uri }}
+                  resizeMode="contain"
+                  style={[styles.image, { backgroundColor: '#f7f7f7' }]}
+                />
+              ) : (
+                <View style={[styles.image, { backgroundColor: '#f7f7f7' }]} />
+              )}
+
               <View
                 style={[globalStyle.center_v, styles.image, styles.titleArea]}
               >

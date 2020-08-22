@@ -29,22 +29,22 @@ type DelPostAction = {
 }
 
 const initialState: PostState[] = [
-  {
-    id: '1',
-    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
-    title: 'メニュー名1',
-    tag: 'ご飯もの',
-    comment: 'aaa',
-    regDate: '2020-07-10',
-  },
-  {
-    id: '2',
-    uri: 'https://facebook.github.io/react-native/img/header_logo.png',
-    title: 'メニューdsadasd名2',
-    tag: 'その他',
-    comment: 'bbb',
-    regDate: '2020-07-12',
-  },
+  // {
+  //   id: '1',
+  //   uri: 'https://facebook.github.io/react-native/img/header_logo.png',
+  //   title: 'メニュー名1',
+  //   tag: 'ご飯もの',
+  //   comment: 'aaa',
+  //   regDate: '2020-07-10',
+  // },
+  // {
+  //   id: '2',
+  //   uri: 'https://facebook.github.io/react-native/img/header_logo.png',
+  //   title: 'メニューdsadasd名2',
+  //   tag: 'その他',
+  //   comment: 'bbb',
+  //   regDate: '2020-07-12',
+  // },
 ]
 
 const State = createSlice({
@@ -85,6 +85,7 @@ export const addPost = (post: PostState) => async (dispatch: any) => {
   try {
     await insertPost(post)
     dispatch(fixPost(post))
+    console.log(post)
   } catch (err) {}
 }
 

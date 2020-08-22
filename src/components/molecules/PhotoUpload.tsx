@@ -45,7 +45,9 @@ export default ({ uri, setUri }: Props): JSX.Element => {
   }
 
   return uri ? (
-    <Image source={{ uri }} resizeMode="contain" style={styles.img} />
+    <TouchableOpacity activeOpacity={0.9} onPress={pickImage}>
+      <Image source={{ uri }} resizeMode="contain" style={styles.img} />
+    </TouchableOpacity>
   ) : (
     <TouchableOpacity
       style={[styles.img, globalStyle.center_vh, styles.noImg]}

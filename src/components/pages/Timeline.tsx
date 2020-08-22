@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { View } from 'react-native'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
 
 // component
 import Scroll from '../templates/Scroll'
@@ -19,20 +19,45 @@ export default (): JSX.Element => {
     : [...posts]
 
   return (
-    <Scroll>
-      {
-        <View>
-          {filteredPosts.map((d: PostState, index: number) => (
+    <ScrollView>
+      {filteredPosts.length ? (
+        filteredPosts.map((d: PostState, index: number) => (
+          <View
+            key={d.id}
+            style={
+              index === 0
+                ? [styles.cardSpace, styles.cardSpaceTop]
+                : index === filteredPosts.length - 1
+                ? [styles.cardSpace, styles.cardSpaceBottom]
+                : [styles.cardSpace]
+            }
+          >
             <Card
-              key={index}
+              key={d.id}
               uri={d.uri}
               title={d.title}
               regDate={d.regDate}
               allInfo={d}
             />
-          ))}
+          </View>
+        ))
+      ) : (
+        <View style={{ padding: 10 }}>
+          <Text>料理がありません。</Text>
         </View>
-      }
-    </Scroll>
+      )}
+    </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  cardSpace: {
+    marginHorizontal: 10,
+  },
+  cardSpaceTop: {
+    marginTop: 5,
+  },
+  cardSpaceBottom: {
+    marginBottom: 5,
+  },
+})
